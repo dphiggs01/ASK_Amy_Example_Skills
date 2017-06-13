@@ -1,0 +1,14 @@
+GetNewFactIntent a fact
+GetNewFactIntent an obama fact
+GetNewFactIntent tell me a fact
+GetNewFactIntent tell me an obama fact
+GetNewFactIntent give me a fact
+GetNewFactIntent give me a obama fact
+GetNewFactIntent tell me trivia
+GetNewFactIntent tell me a obama trivia
+GetNewFactIntent give me trivia
+GetNewFactIntent give me a obama trivia
+GetNewFactIntent give me some information
+GetNewFactIntent give me some obama information
+GetNewFactIntent tell me something
+GetNewFactIntent give me something
