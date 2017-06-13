@@ -5,26 +5,25 @@
 
 #assume the current directory name is the name for the skill function
 SKILL_NM=${PWD##*/}
-
 SKILL_DIR=${PWD}
-SKILLS_FRAMEWORK_DIR=../../skill_fwk
 
+SKILL_ROLE=arn:aws:iam::280056172273:role/AlexaLambdaRole
+SKILL_HANDLER=ask_amy.lambda_function.lambda_handler
 SKILL_ZIP=alexa_skill.zip
 
-# add your aws role that enables alexa to call lambda functions
-AWS_ROLE=arn:aws:iam::280056172273:role/AlexaLambdaRole
-REGION=us-east-1
 
 function create_source_zip {
-   cd $SKILLS_FRAMEWORK_DIR
-   zip -r $SKILL_DIR/$SKILL_ZIP *.py *.json
-   cd $SKILL_DIR
-   zip -r $SKILL_DIR/$SKILL_ZIP *.py *.json
+   #install ask_amy in local directory
+   pip install ask_amy -t $SKILL_DIR/dist/
+   cp *.py *.json $SKILL_DIR/dist/
+	cd $SKILL_DIR/dist
+   zip -r $SKILL_DIR/$SKILL_ZIP *
+   cd -
 }
 
 function update_function {
   aws lambda update-function-code \
-     --region $REGION \
+     --region us-east-1 \
      --function-name $SKILL_NM  \
      --zip-file fileb://$SKILL_ZIP \
      --profile adminuser
@@ -34,8 +33,8 @@ function create_function {
   aws lambda create-function \
      --function-name $SKILL_NM \
      --runtime python3.6 \
-     --role $AWS_ROLE \
-     --handler lambda_function.lambda_handler \
+     --role $SKILL_ROLE \
+     --handler $SKILL_HANDLER \
      --description $SKILL_NM \
      --timeout 3 \
      --memory-size 128 \

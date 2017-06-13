@@ -1,0 +1,3 @@
+[console_scripts]
+ask-amy-cli = ask_amy.command_line:main
+
