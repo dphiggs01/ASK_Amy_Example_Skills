@@ -1,6 +1,6 @@
 import logging
-from ask_amy.default_dialog import DefaultDialog
-from ask_amy.reply import Reply
+from ask_amy.core.default_dialog import DefaultDialog
+from ask_amy.core.reply import Reply
 import random
 
 logger = logging.getLogger()
@@ -8,6 +8,10 @@ logger = logging.getLogger()
 
 class HighLowDialog(DefaultDialog):
     def new_session_started(self, method_name=None):
+        """
+        This method is called when Alexa starts a new session
+        This happens when the session objects 'new' attribute is set to True
+        """
         logger.debug("**************** entering HighLowDialog.new_session_started")
         games_played = self.event().get_value_in_session(['games_played'])
         if games_played is None:
@@ -17,6 +21,11 @@ class HighLowDialog(DefaultDialog):
         self.event().set_value_in_session('winning_number', winning_number)
 
     def number_guess_intent(self, method_name=None):
+        """
+        This method is called when we provide Alexa with a guess
+        Note: That even though this is defined as a number it is not guaranteed
+        to be one so you should do some checking before processing
+        """
         logger.debug('**************** entering HighLowDialog.{}'.format(method_name))
         logger.debug("session={}".format(self.event().get_session_attributes()))
         logger.debug("request={}".format(self.event().request()))
@@ -33,7 +42,7 @@ class HighLowDialog(DefaultDialog):
             winning_number = self.event().get_value_in_session(['winning_number'])
 
             if guessed_number == winning_number:
-                repy_intent_dict = intent_dict['conditions']['winner']
+                reply_intent_dict = intent_dict['conditions']['winner']
                 games_played = self.event().get_value_in_session(['games_played'])
                 self.event().set_value_in_session('games_played', games_played + 1)
                 self.event().session().save()
@@ -43,10 +52,9 @@ class HighLowDialog(DefaultDialog):
                 else:
                     to_high_to_low = 'high'
                 self.event().set_value_in_session('to_high_to_low', to_high_to_low)
-                repy_intent_dict = intent_dict['conditions']['to_high_to_low']
+                reply_intent_dict = intent_dict['conditions']['to_high_to_low']
         else:
-            repy_intent_dict = intent_dict
+            reply_intent_dict = intent_dict
 
-        reply = Reply.build(repy_intent_dict, self.event().session())
-        logger.debug("Reply json={}".format(reply))
-        return reply
+        return Reply.build(reply_intent_dict, self.event().session())
+

@@ -1,0 +1,29 @@
+{
+  "session": {
+    "sessionId": "SessionId.c65c1254-f5d5-4d31-a567-f9cd7c78fde3",
+    "application": {
+      "applicationId": "amzn1.ask.skill.c6fbf52b-8714-48f2-9fc3-20dec4f20b47"
+    },
+    "attributes": {},
+    "user": {
+      "userId": "amzn1.ask.account.AH5IOJ4HZXJARKXBUSO2JJOVLD2E4XSNXKGIXO6XNFPHXYYH25TNVGF26RLWQWROXHEQEYQXDR52RLWODP4EP62P2VC3IB2522RZPE3IQXJYJHD3RNPC32VDVA4GU44S5YKTT4HXQQLPXWTSF6TVWAF3MRCPZMJYD5X4I6GUTEI2LHNGEYGWHTG23DVSVKCWYX6UODI6LJRSXHY"
+    },
+    "new": true
+  },
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.ae88cca3-9e20-44a2-876a-76170e4e9572",
+    "locale": "en-US",
+    "timestamp": "2017-06-02T15:16:38Z",
+    "intent": {
+      "name": "insulinForCarbConsumption",
+      "slots": {
+        "requested_value": {
+          "name": "requested_value",
+          "value": "40"
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

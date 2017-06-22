@@ -1,4 +1,4 @@
-from ask_amy.default_dialog import DefaultDialog
+from ask_amy.core.default_dialog import DefaultDialog
 import json
 import random
 
@@ -6,6 +6,9 @@ import random
 class ObamaDialog(DefaultDialog):
 
     def get_new_fact_intent(self, method_name=None):
+        """
+        Called to generate an Obama fact
+        """
         file_ptr_r = open("./facts.json", 'r')
         facts = json.load(file_ptr_r)
         obama_facts = facts['obama_facts']

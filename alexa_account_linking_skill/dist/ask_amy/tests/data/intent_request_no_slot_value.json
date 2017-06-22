@@ -1,0 +1,16 @@
+{
+  "request": {
+    "type": "IntentRequest",
+    "requestId": "EdwRequestId.38cc43e9-fbff-4701-bdbc-97aff27270fb",
+    "locale": "en-US",
+    "timestamp": "2017-06-12T17:03:34Z",
+    "intent": {
+      "name": "bloodGlucoseCorrection",
+      "slots": {
+        "requested_value": {
+          "name": "requested_value"
+        }
+      }
+    }
+  }
+}

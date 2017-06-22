@@ -1,7 +1,9 @@
 from __future__ import print_function
+
 import logging
-from ask_amy.skill_factory import SkillFactory
-from ask_amy.exceptions import ApplicationIdError
+
+from ask_amy.core.exceptions import ApplicationIdError
+from ask_amy.core.skill_factory import SkillFactory
 
 logger = logging.getLogger()
 logger.setLevel(logging.WARN)

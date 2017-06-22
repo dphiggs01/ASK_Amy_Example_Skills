@@ -2,7 +2,7 @@
 
   "Skill" : {
     "version" : "1.0",
-    "className" : "ask_amy.default_dialog.DefaultDialog",
+    "className" : "ask_amy.core.default_dialog.DefaultDialog",
     "loggingLevel" : "debug"
   },
 
@@ -28,7 +28,7 @@
 
     "handle_default_intent" : {
       "card_title": "Hello Example",
-      "speech_out_text": "Hello World!",
+      "speech_out_text": "Hello World",
       "should_end_session": true
     }
   }
