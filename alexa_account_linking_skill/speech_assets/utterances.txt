@@ -1,3 +1,2 @@
-HelloWorldIntent hello
-HelloWorldIntent say hello
-HelloWorldIntent say hello world
+TimezoneIntent what is my timezone
+TimezoneIntent tell me my timezone

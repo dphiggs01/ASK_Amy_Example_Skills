@@ -12,13 +12,6 @@
 
   "Dialog" : {
 
-    "requestControl" : {
-      "NewSession" : "new_session_started",
-      "LaunchRequest" : "launch_request",
-      "IntentRequest" : "intent_request",
-      "SessionEndedRequest" : "session_ended_request"
-    },
-
     "intentControl" : {
       "HelloWorldIntent" : "handle_default_intent",
       "AMAZON.HelpIntent" : "handle_default_intent",

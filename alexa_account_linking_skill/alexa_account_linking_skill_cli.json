@@ -1,7 +1,6 @@
 {
-  "skill_name": "alexa_hello_skill",
+  "skill_name": "alexa_account_linking_skill",
   "skill_home_dir": ".",
-
   "aws_region": "us-east-1",
   "aws_profile": "default",
   "aws_role": "arn:aws:iam::280056172273:role/AlexaLambdaRole",
@@ -12,7 +11,8 @@
   "lambda_memory": "128",
   "lambda_zip": "alexa_skill.zip",
 
-  "ask_amy_dev" : false,
-  "ask_amy_home_dir": ""
+  "ask_amy_dev" : true,
+  "ask_amy_home_dir": "/Users/danhiggins/Code/AWS/alexa/ask_amy"
 }
+
 

@@ -8,14 +8,8 @@
     "persistence": false
   },
   "Dialog": {
-    "requestControl": {
-      "NewSession": "new_session_started",
-      "LaunchRequest": "launch_request",
-      "IntentRequest": "intent_request",
-      "SessionEndedRequest": "session_ended_request"
-    },
     "intentControl": {
-      "HelloWorldIntent": "hello_world_intent",
+      "TimezoneIntent": "timezone_intent",
       "AMAZON.HelpIntent": "handle_default_intent",
       "AMAZON.CancelIntent": "default_cancel_intent",
       "AMAZON.StopIntent": "default_stop_intent"
@@ -28,13 +22,13 @@
       }
     },
 
-    "hello_world_intent": {
-      "speech_out_text": "Hello {user_name}",
+    "timezone_intent": {
+      "speech_out_text": "your timezone is {user_timezone}",
       "should_end_session": true
     },
 
     "handle_default_intent": {
-      "speech_out_text": "Test Link account with Amazon Login",
+      "speech_out_text": "This skill tests the Link Account feature using Amazon Login to get the users zipcode",
       "should_end_session": true
     }
   }

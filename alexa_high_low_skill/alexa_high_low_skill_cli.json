@@ -1,8 +1,9 @@
 {
   "skill_name": "alexa_high_low_skill",
-  "skill_home_dir": "/Users/danhiggins/Code/AWS/alexa/ask_amy_example_skills/alexa_high_low_skill",
+  "skill_home_dir": ".",
+
   "aws_region": "us-east-1",
-  "aws_profile": "adminuser",
+  "aws_profile": "default",
   "aws_role": "arn:aws:iam::280056172273:role/AlexaLambdaRole",
 
   "lambda_runtime": "python3.6",

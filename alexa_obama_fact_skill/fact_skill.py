@@ -14,5 +14,5 @@ class ObamaDialog(DefaultDialog):
         obama_facts = facts['obama_facts']
         file_ptr_r.close()
         index = random.randint(0,len(obama_facts))
-        self.event().set_value_in_session('obama_fact', obama_facts[index])
+        self.session.put_attribute('obama_fact', obama_facts[index])
         return self.handle_default_intent(method_name)

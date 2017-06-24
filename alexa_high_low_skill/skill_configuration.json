@@ -12,12 +12,7 @@
     ]
   },
   "Dialog": {
-    "requestControl": {
-      "NewSession": "new_session_started",
-      "LaunchRequest": "launch_request",
-      "IntentRequest": "intent_request",
-      "SessionEndedRequest": "session_ended_request"
-    },
+
     "intentControl": {
       "NumberGuessIntent": "number_guess_intent",
       "AMAZON.YesIntent": "number_guess_intent",

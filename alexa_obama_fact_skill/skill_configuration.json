@@ -8,12 +8,6 @@
     "persistence": false
   },
   "Dialog": {
-    "requestControl": {
-      "NewSession": "new_session_started",
-      "LaunchRequest": "launch_request",
-      "IntentRequest": "intent_request",
-      "SessionEndedRequest": "session_ended_request"
-    },
     "intentControl": {
       "GetNewFactIntent": "get_new_fact_intent",
       "AMAZON.HelpIntent": "handle_default_intent",
