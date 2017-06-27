@@ -12,7 +12,7 @@
   "lambda_zip": "alexa_skill.zip",
 
   "ask_amy_dev" : true,
-  "ask_amy_home_dir": "/Users/danhiggins/Code/AWS/alexa/ask_amy"
+  "ask_amy_home_dir": "../../ask_amy"
 }
 
 

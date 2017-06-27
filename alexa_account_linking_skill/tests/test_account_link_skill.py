@@ -18,6 +18,6 @@ class AccountLinkTest(TestAlexaSkillBase):
         profile = self.dialog.amazon_profile()
         print(profile)
 
-        #print(access_token)
+        # print(access_token)
 
 

@@ -13,12 +13,11 @@ class HighLowDialog(DefaultDialog):
         This happens when the session objects 'new' attribute is set to True
         """
         logger.debug("**************** entering HighLowDialog.new_session_started")
-        games_played = self.session.get_attribute(['games_played'])
-        if games_played is None:
-            self.session.put_attribute('games_played', 0)
+        if 'games_played' not in self.session.attributes.keys():
+            self.session.attributes['games_played'] = 0
 
         winning_number = random.randint(0, 100)
-        self.session.put_attribute('winning_number', winning_number)
+        self.session.attributes['winning_number'] = winning_number
 
     def number_guess_intent(self, method_name=None):
         """
@@ -34,21 +33,21 @@ class HighLowDialog(DefaultDialog):
         # 2. See if we got any slots filled
         guessed_number_str = self.request.value_for_slot_name('number')
         if guessed_number_str is not None:
-            self.session.put_attribute('guessed_number', guessed_number_str)
+            self.session.attributes['guessed_number'] = guessed_number_str
             guessed_number = int(guessed_number_str)
-            winning_number = self.session.get_attribute(['winning_number'])
+            winning_number = self.session.attributes['winning_number']
 
             if guessed_number == winning_number:
                 reply_intent_dict = intent_dict['conditions']['winner']
-                games_played = self.session.get_attribute(['games_played'])
-                self.session.put_attribute('games_played', games_played + 1)
+                games_played = self.session.attributes['games_played']
+                self.session.attributes['games_played']= games_played + 1
                 self.session.save()
             else:
                 if guessed_number < winning_number:
                     to_high_to_low = 'low'
                 else:
                     to_high_to_low = 'high'
-                self.session.put_attribute('to_high_to_low', to_high_to_low)
+                self.session.attributes['to_high_to_low'] = to_high_to_low
                 reply_intent_dict = intent_dict['conditions']['to_high_to_low']
         else:
             reply_intent_dict = intent_dict

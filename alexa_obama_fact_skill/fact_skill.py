@@ -9,10 +9,15 @@ class ObamaDialog(DefaultDialog):
         """
         Called to generate an Obama fact
         """
-        file_ptr_r = open("./facts.json", 'r')
-        facts = json.load(file_ptr_r)
-        obama_facts = facts['obama_facts']
-        file_ptr_r.close()
+        obama_facts = self._load_facts()
         index = random.randint(0,len(obama_facts))
-        self.session.put_attribute('obama_fact', obama_facts[index])
+        self.session.attributes['obama_fact'] = obama_facts[index]
         return self.handle_default_intent(method_name)
+
+    def _load_facts(self):
+        facts_file = open("./facts.json", 'r')
+        facts_json = json.load(facts_file)
+        facts = facts_json['obama_facts']
+        facts_file.close()
+        return facts
+

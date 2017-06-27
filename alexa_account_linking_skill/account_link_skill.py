@@ -14,7 +14,7 @@ class AccountLinkDialog(DefaultDialog):
     def launch_request(self, method_name=None):
         logger.debug("**************** entering AccountLinkDialog.launch_request")
 
-        if self.session.access_token() is None:
+        if self.session.access_token is None:
             return self.account_link_intent(method_name)
         else:
             return self.timezone_intent(method_name)
@@ -31,11 +31,11 @@ class AccountLinkDialog(DefaultDialog):
         """
         Called to speak the time zone
         """
-        amazon_profile = AmazonProfile(self.session.access_token())
+        amazon_profile = AmazonProfile(self.session.access_token)
         zip_code = amazon_profile.get_zip_code()
         zip_code_db = ZipcodeDB()
         user_timezone = zip_code_db.get_timezone_for_zip_code(zip_code)
-        self.session.put_attribute("user_timezone", user_timezone)
+        self.session.attributes["user_timezone"] = user_timezone
         intent_dict = self.get_intent_details('timezone_intent')
         return Reply.build(intent_dict,self.session)
 
