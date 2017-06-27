@@ -9,25 +9,23 @@ logger = logging.getLogger()
 
 
 class AccountLinkDialog(DefaultDialog):
-
     @utilities.timing
-    def launch_request(self, method_name=None):
+    def launch_request(self):
         logger.debug("**************** entering AccountLinkDialog.launch_request")
-
         if self.session.access_token is None:
-            return self.account_link_intent(method_name)
+            return self.account_link_intent()
         else:
-            return self.timezone_intent(method_name)
+            return self.timezone_intent()
 
-    def account_link_intent(self, method_name=None):
+    def account_link_intent(self):
         """
         Called to generate an Account Link Card
         """
-        intent_dict = self.get_intent_details('account_link_intent')
-        return Reply.build(intent_dict)
+        reply_dialog = self.reply_dialog['account_link_intent']
+        return Reply.build(reply_dialog)
 
     @utilities.timing
-    def timezone_intent(self, method_name=None):
+    def timezone_intent(self):
         """
         Called to speak the time zone
         """
@@ -36,8 +34,5 @@ class AccountLinkDialog(DefaultDialog):
         zip_code_db = ZipcodeDB()
         user_timezone = zip_code_db.get_timezone_for_zip_code(zip_code)
         self.session.attributes["user_timezone"] = user_timezone
-        intent_dict = self.get_intent_details('timezone_intent')
-        return Reply.build(intent_dict,self.session)
-
-
-
+        reply_dialog = self.reply_dialog['timezone_intent']
+        return Reply.build(reply_dialog, self.session)
