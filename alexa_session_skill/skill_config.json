@@ -1,0 +1,40 @@
+{
+  "Skill" : {
+    "version": "1.0",
+    "className": "alexa_session_skill.AlexaSessionSkill",
+    "loggingLevel": "debug"
+  },
+  "Session": {
+    "persistence": false
+  },
+  "Dialog": {
+    "intentControl": {
+      "MyColorIsIntent": "my_color_is_intent",
+      "WhatsMyColorIntent": "whats_my_color_intent",
+      "AMAZON.HelpIntent": "help_intent",
+      "AMAZON.CancelIntent": "handle_session_end_request",
+      "AMAZON.StopIntent": "handle_session_end_request"
+    },
+    "slots": {
+      "Color":
+            {
+               "speech_out_text": "Please provide the Color",
+               "re_prompt_text": "Sorry I did not hear that.",
+               "expected_intent": "my_color_is_intent"
+            }
+    },
+    "my_color_is_intent": {
+        "speech_out_text": "you have called the my color is intent",
+        "should_end_session": true
+        },
+    "whats_my_color_intent": {
+        "speech_out_text": "you have called the whats my color intent",
+        "should_end_session": true
+        },
+    "help_intent": {
+        "method_name": "handle_default_intent",
+        "speech_out_text": "help intent",
+        "should_end_session": true
+        }
+  }
+}

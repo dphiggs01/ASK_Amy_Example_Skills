@@ -12,7 +12,6 @@ class AccountLinkTest(TestAlexaSkillBase):
         self.dialog = SkillFactory.build(CONFIG)
 
     def test_get_user_name(self):
-        self.logger.debug("AccountLinkTest.test_get_user_name")
         event_dict, response = self.get_request_response('open_request.json')
         self.dialog.set_event(Event(event_dict))
         profile = self.dialog.amazon_profile()

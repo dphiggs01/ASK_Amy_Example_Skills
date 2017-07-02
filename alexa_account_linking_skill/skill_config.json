@@ -10,7 +10,7 @@
   "Dialog": {
     "intentControl": {
       "TimezoneIntent": "timezone_intent",
-      "AMAZON.HelpIntent": "handle_default_intent",
+      "AMAZON.HelpIntent": "help_intent",
       "AMAZON.CancelIntent": "default_cancel_intent",
       "AMAZON.StopIntent": "default_stop_intent"
     },
@@ -28,6 +28,7 @@
     },
 
     "handle_default_intent": {
+      "method_name" : "handle_default_intent",
       "speech_out_text": "This skill tests the Link Account feature using Amazon Login to get the users zipcode",
       "should_end_session": true
     }

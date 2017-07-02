@@ -1,0 +1,97 @@
+{
+  "Skill": {
+    "version": "1.0",
+    "className": "tide_skill.TideDialog",
+    "loggingLevel": "debug"
+  },
+  "Session": {
+    "persistence": false
+  },
+  "Dialog": {
+    "intentControl": {
+      "OneshotTideIntent": "oneshot_tide_intent",
+      "DialogTideIntent": "dialog_tide_intent",
+      "SupportedCitiesIntent": "supported_cities_intent",
+      "AMAZON.HelpIntent": "help_intent",
+      "AMAZON.CancelIntent": "default_cancel_intent",
+      "AMAZON.StopIntent": "default_stop_intent"
+    },
+    "slots": {
+      "Date": {
+        "speech_out_text": "For which date would you like tide information for? ",
+        "re_prompt_text": "Sorry I did not hear that. You can say today or saturday ",
+        "expected_intent": "dialog_tide_intent"
+      },
+      "City": {
+        "speech_out_text": "For which city would you like tide information for? ",
+        "re_prompt_text": "Sorry I did not hear that. You can say seattle or boston ",
+        "expected_intent": "dialog_tide_intent"
+      }
+    },
+    "oneshot_tide_intent": {
+      "conditions": {
+        "found_tides": {
+          "speech_out_ssml": [
+            "In {City} the first high tide will be around <say-as interpret-as='time'> ",
+            "{first_high_tide_time} </say-as> and will peak at {first_high_tide_height}, ",
+            "followed by a low tide at <say-as interpret-as='time'> {first_low_tide_time} ",
+            "</say-as> that will be approximately {first_low_tide_height}. ",
+            "The second high tide will be at <say-as interpret-as='time'> {second_high_tide_time} ",
+            "</say-as> and will peak at about {second_high_tide_height}. "
+          ],
+          "should_end_session": true
+        },
+        "failed_to_find_tides": {
+          "speech_out_text": [
+            "You provided {City} as the city and {Date} as the date ",
+            "Sorry, the National Oceanic tide service is experiencing a problem. ",
+            "Please try again later."
+          ],
+          "should_end_session": true
+        }
+      }
+    },
+    "dialog_tide_intent": {
+      "card_title": "DialogTideIntent",
+      "speech_out_text": "You provided {City} as the city and {Date} as the date",
+      "should_end_session": true
+    },
+    "supported_cities_intent": {
+      "card_title": "SupportedCitiesIntent",
+      "speech_out_text": [
+        "Currently, I know tide information for these coastal cities: {coastal_cities}",
+        "Which city would you like tide information for?"
+      ],
+      "re_prompt_text": "Which city would you like tide information for?",
+      "should_end_session": false
+    },
+    "launch_request": {
+      "method_name": "handle_default_intent",
+      "speech_out_ssml": [
+        "Welcome to Tide Pooler. ",
+        "<audio src='https://s3.amazonaws.com/ask-storage/tidePooler/OceanWaves.mp3'/>",
+        "Which city would you like tide information for?"
+      ],
+      "re_prompt_text": [
+        "What city would you like tide info for? ",
+        "If you would like help, just say help please. "
+      ],
+      "should_end_session": false
+    },
+    "help_intent": {
+      "method_name": "handle_default_intent",
+      "speech_out_text": [
+        "I can lead you through providing a city and ",
+        "day of the week to get tide information, ",
+        "or you can simply open Tide Pooler and ask a question like, ",
+        "get tide information for Seattle on Saturday. ",
+        "For a list of supported cities, ask what cities are supported. ",
+        "Or you can say exit. ",
+        "Which city would you like tide information for?"
+      ],
+      "should_end_session": false
+    }
+  }
+}
+
+

@@ -28,7 +28,6 @@
       "conditions": {
         "winner": {
           "speech_out_text": "Congratulations you guessed {guessed_number} and this is correct ",
-          "re_prompt_text": "Sorry I did not hear that. Please guess again ",
           "should_end_session": true
         },
         "to_high_to_low": {
