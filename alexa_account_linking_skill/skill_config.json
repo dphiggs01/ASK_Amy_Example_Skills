@@ -1,7 +1,7 @@
 {
-  "Skill": {
+  "Skill" : {
     "version": "1.0",
-    "className": "account_link_skill.AccountLinkDialog",
+    "className": "alexa_account_linking_skill.AlexaAccountLinkingSkill",
     "loggingLevel": "debug"
   },
   "Session": {
@@ -21,17 +21,14 @@
         "type": "LinkAccount"
       }
     },
-
     "timezone_intent": {
-      "speech_out_text": "your timezone is {user_timezone}",
-      "should_end_session": true
-    },
-
-    "handle_default_intent": {
-      "method_name" : "handle_default_intent",
-      "speech_out_text": "This skill tests the Link Account feature using Amazon Login to get the users zipcode",
-      "should_end_session": true
-    }
+        "speech_out_text": "your timezone is {user_timezone}",
+        "should_end_session": true
+        },
+    "help_intent": {
+        "method_name": "handle_default_intent",
+        "speech_out_text": "This skill tests the Link Account feature using Amazon Login to get the users zipcode",
+        "should_end_session": true
+        }
   }
 }
-

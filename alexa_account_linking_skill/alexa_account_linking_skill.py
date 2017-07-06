@@ -3,15 +3,12 @@ from ask_amy.core.reply import Reply
 from ask_amy.utilities.account_link import AmazonProfile
 import logging
 from zip_code_db import ZipcodeDB
-import utilities
 
 logger = logging.getLogger()
 
-
-class AccountLinkDialog(DefaultDialog):
-    @utilities.timing
+class AlexaAccountLinkingSkill(DefaultDialog):
     def launch_request(self):
-        logger.debug("**************** entering AccountLinkDialog.launch_request")
+        logger.debug("**************** entering {}.launch_request".format(self.__class__.__name__))
         if self.session.access_token is None:
             return self.account_link_intent()
         else:
@@ -21,14 +18,12 @@ class AccountLinkDialog(DefaultDialog):
         """
         Called to generate an Account Link Card
         """
+        logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
         reply_dialog = self.reply_dialog['account_link_intent']
         return Reply.build(reply_dialog)
 
-    @utilities.timing
     def timezone_intent(self):
-        """
-        Called to speak the time zone
-        """
+        logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
         amazon_profile = AmazonProfile(self.session.access_token)
         zip_code = amazon_profile.get_zip_code()
         zip_code_db = ZipcodeDB()
@@ -36,3 +31,4 @@ class AccountLinkDialog(DefaultDialog):
         self.session.attributes["user_timezone"] = user_timezone
         reply_dialog = self.reply_dialog['timezone_intent']
         return Reply.build(reply_dialog, self.session)
+

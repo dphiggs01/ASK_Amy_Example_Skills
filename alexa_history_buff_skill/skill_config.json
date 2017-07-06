@@ -1,0 +1,87 @@
+{
+  "Skill" : {
+    "version": "1.0",
+    "className": "alexa_history_buff_skill.AlexaHistoryBuffSkill",
+    "loggingLevel": "debug"
+  },
+  "Session": {
+    "persistence": false
+  },
+  "Dialog": {
+    "intentControl": {
+      "GetFirstEventIntent": "get_first_event_intent",
+      "GetNextEventIntent": "get_next_event_intent",
+      "AMAZON.HelpIntent": "help_intent",
+      "AMAZON.CancelIntent": "default_cancel_intent",
+      "AMAZON.StopIntent": "default_stop_intent"
+    },
+    "slots": {
+      "day":
+            {
+               "speech_out_text": "What day do you want events for?",
+               "re_prompt_text": "Sorry I did not hear that.",
+               "expected_intent": "get_first_event_intent"
+            }
+    },
+    "get_first_event_intent": {
+      "conditions": {
+        "have_events": {
+          "speech_out_ssml": "<p>{event_1}</p><p>{event_2}</p><p>{event_3}</p> <p>Wanna go deeper in history?</p>",
+          "re_prompt_text": "Do you want to know more about what happened on this date?",
+          "card": {
+            "title": "Events on {month} {day}",
+            "content": "{event_1}\n{event_2}\n{event_3}\n"
+          },
+          "should_end_session": false
+        },
+        "no_events": {
+          "speech_out_ssml": "Sorry, we are having a problem with the server. Please try agian later",
+          "should_end_session": true
+        }
+      }
+      },
+    "get_next_event_intent": {
+      "conditions": {
+        "have_events": {
+          "speech_out_ssml": "<p>{event_1}</p><p>{event_2}</p><p>{event_3}</p> <p>Wanna go deeper in history?</p>",
+          "re_prompt_text": "Do you want to know more about what happened on this date?",
+          "card": {
+            "title": "Events on {month} {day}",
+            "content": "{event_1}\n{event_2}\n{event_3}\n"
+          },
+          "should_end_session": false
+        },
+        "no_events": {
+          "speech_out_ssml": "We have no more events for this day. Please choose another date",
+          "should_end_session": true
+        }
+      }
+    },
+    "launch_request": {
+      "method_name": "handle_default_intent",
+      "speech_out_text": "History buff. What day do you want events for?",
+      "re_prompt_text": [
+        "With History Buff, you can get historical events for any day of the year. ",
+        "For example, you could say today, or August thirtieth. ",
+        "Now, which day do you want? "
+      ],
+      "should_end_session": false
+    },
+
+    "help_intent": {
+        "method_name": "handle_default_intent",
+        "speech_out_text": [
+          "With History Buff, you can get historical events for any day of the year. ",
+          "For example, you could say today, or August thirtieth, or you can say exit. ",
+          "Now, which day do you want?"
+        ],
+        "re_prompt_text": "Which day do you want?",
+        "should_end_session": false
+        }
+  }
+}
+
+
+
+
+

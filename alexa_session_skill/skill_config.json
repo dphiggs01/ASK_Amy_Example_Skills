@@ -18,23 +18,27 @@
     "slots": {
       "Color":
             {
-               "speech_out_text": "Please provide the Color",
+               "speech_out_text": "Please say your favorite color",
                "re_prompt_text": "Sorry I did not hear that.",
                "expected_intent": "my_color_is_intent"
             }
     },
     "my_color_is_intent": {
-        "speech_out_text": "you have called the my color is intent",
-        "should_end_session": true
+        "speech_out_text": "I now know your favorite color is {Color}. You can now ask. What's my favorite color?",
+        "should_end_session": false
         },
     "whats_my_color_intent": {
-        "speech_out_text": "you have called the whats my color intent",
+        "speech_out_text": "Your favorite color is {Color}.",
         "should_end_session": true
         },
     "help_intent": {
         "method_name": "handle_default_intent",
-        "speech_out_text": "help intent",
-        "should_end_session": true
+        "speech_out_text": [
+             "Welcome to the Alexa Skills Kit sample. Please tell me your favorite color by ",
+             "saying, my favorite color is red"
+        ],
+        "re_prompt_text": "Please tell me your favorite color by saying, my favorite color is red",
+        "should_end_session": false
         }
   }
 }

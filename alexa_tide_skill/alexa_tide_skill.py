@@ -6,12 +6,13 @@ import datetime
 import json
 
 from ask_amy.state_mgr.stack_dialog_mgr import StackDialogManager
+from ask_amy.state_mgr.stack_dialog_mgr import required_fields
 from ask_amy.core.reply import Reply
 
 logger = logging.getLogger()
 
 
-class TideDialog(StackDialogManager):
+class AlexaTideSkill(StackDialogManager):
     def launch_request(self):
         logger.debug("**************** entering {}.launch_request".format(self.__class__.__name__))
         # Recall that a LaunchRequest is not == to an IntentRequest and does not have an intent_name
@@ -24,21 +25,11 @@ class TideDialog(StackDialogManager):
         self.session.attributes['coastal_cities'] = TideInfo.valid_cities()
         return self.handle_default_intent()
 
-    def oneshot_tide_intent(self):
+    @required_fields(['City', 'Date'])
+    def dialog_tide_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
-        # 1. Check the state of the conversation and react if things smell funny
-        if not self.is_good_state():
-            return self.handle_session_end_confused()
 
-        # 2. See if we have any slots filled
-        self.event.slot_data_to_session_attributes()
-
-        # 3. That we have all our required fields
-        need_additional_data = self.required_fields_process(['City', 'Date'])
-        if need_additional_data is not None:
-            return need_additional_data
-
-        # 4. We have what is needed lets get the tides
+        # required_fields decorator will redirect us if we do not have all the needed fields
         tides = TideInfo.tide_http_call(
             self.session.attributes['City'],
             self.session.attributes['Date']
@@ -49,20 +40,16 @@ class TideDialog(StackDialogManager):
                 self.session.attributes[key] = tides[key]
                 condition = 'found_tides'
 
-        # 5. Provide a return to alexa
         reply_dialog = self.reply_dialog[self.intent_name]['conditions'][condition]
         return Reply.build(reply_dialog, self.session)
 
-    def dialog_tide_intent(self):
+    def oneshot_tide_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
 
-        established_dialog = self.peek_established_dialog()
-        if established_dialog:
-            # If we have a dialog delegate to requested value intent
-            return self.requested_value_intent()
-        else:
-            # If no dialog then lets start one
-            return self.redirect_to_initialize_dialog('oneshot_tide_intent')
+        # With ask_amy we really do not need to intent as the DialogTideIntent will do the same thing
+        # if it has all the required fields. This is maintained to keep compatability with the sample
+        # intent_schema.json provided by Java sample apps
+        return self.redirect_to_initialize_dialog('dialog_tide_intent')
 
 
 class TideInfo(object):
