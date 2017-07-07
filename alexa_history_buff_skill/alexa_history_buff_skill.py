@@ -17,7 +17,7 @@ class AlexaHistoryBuffSkill(StackDialogManager):
     def get_first_event_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
 
-        date_str = self.session.attributes['day']
+        date_str = self.request.attributes['day']
         date = datetime.datetime.strptime(date_str, "%Y-%m-%d")
 
         month = date.strftime('%B')
@@ -36,10 +36,9 @@ class AlexaHistoryBuffSkill(StackDialogManager):
             condition = 'no_events'
 
         reply_dialog = self.reply_dialog[self.intent_name]['conditions'][condition]
-        return Reply.build(reply_dialog, self.session)
+        return Reply.build(reply_dialog, self.event)
 
 
-    @required_fields(['day'])
     def get_next_event_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
         events = self.session.attributes['events']
@@ -52,7 +51,7 @@ class AlexaHistoryBuffSkill(StackDialogManager):
             condition = 'no_events'
 
         reply_dialog = self.reply_dialog[self.intent_name]['conditions'][condition]
-        return Reply.build(reply_dialog, self.session)
+        return Reply.build(reply_dialog, self.event)
 
 
 class HistoryBuff(object):
@@ -107,7 +106,7 @@ class HistoryBuff(object):
                     event_text = events_str[start_index:]
 
                 # replace dashes returned in events_str from Wikipedia's API
-                event_text = event_text.replace('\\u2013', '')
+                event_text = event_text.replace('\u2013', '')
                 # add comma after year so Alexa pauses before continuing with the sentence
                 event_text = re.sub('^\d+', r'\g<0>,', event_text)
                 events.append(event_text)

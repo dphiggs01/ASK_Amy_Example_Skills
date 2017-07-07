@@ -31,8 +31,8 @@ class AlexaTideSkill(StackDialogManager):
 
         # required_fields decorator will redirect us if we do not have all the needed fields
         tides = TideInfo.tide_http_call(
-            self.session.attributes['City'],
-            self.session.attributes['Date']
+            self.request.attributes['City'],
+            self.request.attributes['Date']
         )
         condition = 'failed_to_find_tides'
         if tides is not None:
@@ -41,13 +41,13 @@ class AlexaTideSkill(StackDialogManager):
                 condition = 'found_tides'
 
         reply_dialog = self.reply_dialog[self.intent_name]['conditions'][condition]
-        return Reply.build(reply_dialog, self.session)
+        return Reply.build(reply_dialog, self.event)
 
     def oneshot_tide_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
 
-        # With ask_amy we really do not need to intent as the DialogTideIntent will do the same thing
-        # if it has all the required fields. This is maintained to keep compatability with the sample
+        # With ask_amy we really do not need two intents as the DialogTideIntent will do the same thing
+        # if it has all the required fields. This is maintained to keep compatibility with the sample
         # intent_schema.json provided by Java sample apps
         return self.redirect_to_initialize_dialog('dialog_tide_intent')
 
@@ -97,28 +97,37 @@ class TideInfo(object):
         for e in predictions:
             tides[e['t']] = float(e['v'])
 
-        found_h1 = False
-        found_l1 = False
-        found_h2 = False
+        found_first_low_tide = False
+        found_first_high_tide = False
+        found_second_low_tide = False
+        found_second_high_tide = False
         times = sorted(tides)
         for t in range(0, len(times) - 1):
             tide1 = tides[times[t]]
             tide2 = tides[times[t + 1]]
-            if not found_h1 and tide2 < tide1:
-                t_am_pm = datetime.datetime.strptime(times[t][11:], "%H:%M")
-                ret_val['first_high_tide_time'] = t_am_pm.strftime("%I:%M %p")
-                ret_val['first_high_tide_height'] = round(float(tide1), 1)
-                found_h1 = True
-            if found_h1 and not found_l1 and tide2 > tide1:
+
+            if not found_first_low_tide and tide2 > tide1:
                 t_am_pm = datetime.datetime.strptime(times[t][11:], "%H:%M")
                 ret_val['first_low_tide_time'] = t_am_pm.strftime("%I:%M %p")
                 ret_val['first_low_tide_height'] = round(float(tide1), 1)
-                found_l1 = True
-            if found_l1 and not found_h2 and tide2 < tide1:
+                found_first_low_tide = True
+            if found_first_low_tide and not found_first_high_tide and tide2 < tide1:
+                t_am_pm = datetime.datetime.strptime(times[t][11:], "%H:%M")
+                ret_val['first_high_tide_time'] = t_am_pm.strftime("%I:%M %p")
+                ret_val['first_high_tide_height'] = round(float(tide1), 1)
+                found_first_high_tide = True
+
+            if found_first_high_tide and not found_second_low_tide and tide2 > tide1:
+                t_am_pm = datetime.datetime.strptime(times[t][11:], "%H:%M")
+                ret_val['second_low_tide_time'] = t_am_pm.strftime("%I:%M %p")
+                ret_val['second_low_tide_height'] = round(float(tide1), 1)
+                found_second_low_tide = True
+            if found_second_low_tide and not found_second_high_tide and tide2 < tide1:
                 t_am_pm = datetime.datetime.strptime(times[t][11:], "%H:%M")
                 ret_val['second_high_tide_time'] = t_am_pm.strftime("%I:%M %p")
                 ret_val['second_high_tide_height'] = round(float(tide1), 1)
-                found_h2 = True
+                found_second_high_tide = True
+
         return ret_val
 
     @staticmethod
@@ -144,3 +153,4 @@ class TideInfo(object):
                 logger.critical('The server couldn\'t fulfill the request.')
                 logger.critical('Error code: ', e.code)
         return ret_val
+

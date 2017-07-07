@@ -54,7 +54,7 @@ class AlexaHighLowSkill(DefaultDialog):
 
                 reply_dialog = reply_dialog['conditions']['to_high_to_low']
 
-        return Reply.build(reply_dialog, self.event.session)
+        return Reply.build(reply_dialog, self.event)
 
 
 class HighLowGame(object):

@@ -29,18 +29,22 @@
       }
     },
     "oneshot_tide_intent": {
-      "COMMENT": "oneshot_tide_intent is really not needed with ask_amy but kept here for compatability"
+      "COMMENT": [
+        "oneshot_tide_intent is not needed with ask_amy framework as the dialog_tide_intent ",
+        "will act as a one shot if all the required data is provided ",
+        "it is kept here to maintain compatibility with the Java Examples."
+        ]
     },
     "dialog_tide_intent": {
       "conditions": {
         "found_tides": {
           "speech_out_ssml": [
             "In {City} the first high tide will be around <say-as interpret-as='time'> ",
-            "{first_high_tide_time} </say-as> and will peak at {first_high_tide_height}, ",
-            "followed by a low tide at <say-as interpret-as='time'> {first_low_tide_time} ",
-            "</say-as> that will be approximately {first_low_tide_height}. ",
+            "{first_high_tide_time} </say-as> and will peak at {first_high_tide_height} ",
+            "feet, followed by a low tide at <say-as interpret-as='time'> {second_low_tide_time} ",
+            "</say-as> that will be approximately {second_low_tide_height} feet. ",
             "The second high tide will be at <say-as interpret-as='time'> {second_high_tide_time} ",
-            "</say-as> and will peak at about {second_high_tide_height}. "
+            "</say-as> and will peak at about {second_high_tide_height} feet. "
           ],
           "should_end_session": true
         },

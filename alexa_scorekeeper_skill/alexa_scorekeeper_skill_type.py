@@ -74,5 +74,10 @@ class LIST_OF_PLAYER_NAMES(Custom_Validator):
                     'zachariah', 'zachary']
 
     def is_valid_value(value):
-        return value.lower() in LIST_OF_PLAYER_NAMES._valid_values
-
+        status = 0
+        message = ""
+        is_name_valid = value.lower() in LIST_OF_PLAYER_NAMES._valid_values
+        if not is_name_valid:
+            status = -1
+            message = "sorry I could not understand the name provided"
+        return status, message

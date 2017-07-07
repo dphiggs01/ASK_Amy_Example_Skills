@@ -30,5 +30,5 @@ class AlexaAccountLinkingSkill(DefaultDialog):
         user_timezone = zip_code_db.get_timezone_for_zip_code(zip_code)
         self.session.attributes["user_timezone"] = user_timezone
         reply_dialog = self.reply_dialog['timezone_intent']
-        return Reply.build(reply_dialog, self.session)
+        return Reply.build(reply_dialog, self.event)
 

@@ -24,31 +24,47 @@
     },
     "slots": {
       "PlayerName": {
-        "speech_out_text": "OK. Who do you want to add?",
-        "re_prompt_text": "Sorry, I did not hear the player name. Please say again?",
+        "speech_out_text": "OK. What is the players name?",
+        "re_prompt_text": "Sorry, I did not hear the players name. Please say again?",
         "expected_intent": "add_player_intent",
         "type": "alexa_scorekeeper_skill_type.LIST_OF_PLAYER_NAMES"
       },
       "ScoreNumber": {
-        "speech_out_text": "Please provide the number of points",
+        "speech_out_text": "Please provide the number of points. You can say five points",
         "re_prompt_text": "Sorry, I did not hear the points. Please say again?",
         "expected_intent": "add_score_intent",
         "type": "AMAZON.NUMBER"
       }
     },
     "add_player_intent": {
-      "speech_out_text": "{PlayerName} has joined your game.",
-      "should_end_session": false
+      "conditions": {
+        "valid_name": {
+          "speech_out_text": "{PlayerName} has joined your game.",
+          "should_end_session": false
+        },
+        "invalid_name": {
+          "speech_out_text": "Error adding name {PlayerName}, Please try again with a different name",
+          "should_end_session": false
+        }
+      }
     },
     "add_score_intent": {
       "conditions": {
-        "added": {
-          "speech_out_text": "Updating the score, {score_points} for {PlayerName}",
-          "should_end_session": true
+        "no_player_provided": {
+          "speech_out_text": "Sorry we did not get a player name. Please say something like: give john five points",
+          "should_end_session": false
         },
-        "not_added": {
-          "speech_out_text": "Error adding points for {PlayerName}",
-          "should_end_session": true
+        "invalid_player_provided": {
+          "speech_out_text": "Error adding points for {PlayerName}. Please check that this person is currently playing",
+          "should_end_session": false
+        },
+        "invalid_score_provided": {
+          "speech_out_text": "Sorry we did not understand the score provided. Please try again",
+          "should_end_session": false
+        },
+        "score_added": {
+          "speech_out_text": "{score_points} added to {PlayerName}'s total",
+          "should_end_session": false
         }
       }
     },
@@ -74,12 +90,20 @@
       }
     },
     "tell_scores_intent": {
-      "speech_out_text": "The score look like this, {leader_board}",
-      "card": {
-        "title": "Scorekeeper Leaderboard",
-        "content": "The score look like this:\n {leader_board}"
-      },
-      "should_end_session": true
+      "conditions": {
+        "no_players": {
+          "speech_out_text": "Currently there is no score as you have no players",
+          "should_end_session": false
+        },
+        "has_players": {
+          "speech_out_text": "The score looks like this, {leader_board}",
+          "card": {
+            "title": "Scorekeeper Leaderboard",
+            "content": "The score looks like this:\n {leader_board}"
+          },
+          "should_end_session": false
+        }
+      }
     },
     "welcome_request": {
       "conditions": {

@@ -4,8 +4,8 @@ from ask_amy.core.reply import Reply
 import logging
 from operator import itemgetter
 
-
 logger = logging.getLogger()
+
 
 class AlexaScorekeeperSkill(StackDialogManager):
     def new_session_started(self):
@@ -18,93 +18,122 @@ class AlexaScorekeeperSkill(StackDialogManager):
             self.session.attributes['game'] = {}
 
     def launch_request(self):
-        logger.debug("**************** entering DiabetesDialog.launch_request")
+        logger.debug("**************** entering {}.launch_request".format(self.__class__.__name__))
         self._intent_name = 'welcome_request'
-        scorekeeper = Scorekeer(self.session.attributes['game'])
-        condition='no_players'
+        scorekeeper = Scorekeeper(self.session.attributes['game'])
+        condition = 'no_players'
         if scorekeeper.number_of_players > 0:
-            payer_players = lambda players: '1 player' if players == 1 else str(players)+' players'
-            self.session.attributes['players_text'] = payer_players(scorekeeper.number_of_players)
-            condition='has_players'
+            payer_players = lambda players: '1 player' if players == 1 else str(players) + ' players'
+            self.request.attributes['players_text'] = payer_players(scorekeeper.number_of_players)
+            condition = 'has_players'
 
         reply_dialog = self.reply_dialog[self.intent_name]
-        return Reply.build(reply_dialog['conditions'][condition], self.session)
-
-
-    @required_fields(['PlayerName'])
-    def add_player_intent(self):
-        logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
-        scorekeeper = Scorekeer(self.session.attributes['game'])
-        scorekeeper.add_player(self.session.attributes['PlayerName'])
-        self.session.attributes['game'] = scorekeeper.game
-        self.session.save()
-        return self.handle_default_intent()
-
-    @required_fields(['PlayerName','ScoreNumber'])
-    def add_score_intent(self):
-        logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
-        scorekeeper = Scorekeer(self.session.attributes['game'])
-        player = self.session.attributes['PlayerName']
-        score_str = self.session.attributes['ScoreNumber']
-
-        return_code, error_message =scorekeeper.add_score(player,score_str)
-        if return_code == 0:
-            condition='added'
-            self.session.attributes['game'] = scorekeeper.game
-            score_points = lambda score: '1 point' if score == 1 else str(score)+' points'
-            self.session.attributes['score_points'] = score_points(int(score_str))
-            self.session.save()
-        else:
-            condition='not_added'
-            self.session.attributes['error'] = error_message
-
-        reply_dialog = self.reply_dialog[self.intent_name]
-        return Reply.build(reply_dialog['conditions'][condition], self.session)
+        return Reply.build(reply_dialog['conditions'][condition], self.event)
 
     def reset_players_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
-        scorekeeper = Scorekeer(self.session.attributes['game'])
-        scorekeeper.reset_game()
+        scorekeeper = Scorekeeper(self.session.attributes['game'])
         self.session.attributes['game'] = scorekeeper.reset_game()
         self.session.save()
         return self.handle_default_intent()
 
     def new_game_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
-        scorekeeper = Scorekeer(self.session.attributes['game'])
+        scorekeeper = Scorekeeper(self.session.attributes['game'])
         self.session.attributes['game'] = scorekeeper.new_game()
         self.session.save()
-        condition='no_players'
+        condition = 'no_players'
         if scorekeeper.number_of_players > 0:
-            payer_players = lambda players: '1 player' if players == 1 else str(players)+' players'
-            self.session.attributes['players_text'] = payer_players(scorekeeper.number_of_players)
-            condition='has_players'
+            payer_players = lambda players: '1 player' if players == 1 else str(players) + ' players'
+            self.request.attributes['players_text'] = payer_players(scorekeeper.number_of_players)
+            condition = 'has_players'
 
         reply_dialog = self.reply_dialog[self.intent_name]
-        return Reply.build(reply_dialog['conditions'][condition], self.session)
-
+        return Reply.build(reply_dialog['conditions'][condition], self.event)
 
     def tell_scores_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
-        scores = self.session.attributes['game']
-        leader_board = ''
-        for player, score in sorted(scores.items(), key=itemgetter(1), reverse=True):
-            point_or_points = lambda score: ' point \n' if score == 1 else ' points \n'
-            leader_board += player + ' has ' + str(score) + point_or_points(score)
+        scorekeeper = Scorekeeper(self.session.attributes['game'])
 
-        self.session.attributes['leader_board'] = leader_board
-        return self.handle_default_intent()
+        condition = 'no_players'
+        if scorekeeper.number_of_players > 0:
+            leader_board = ''
+            condition = 'has_players'
+            for player, score in scorekeeper.leader_board():
+                point_or_points = lambda score: ' point \n' if score == 1 else ' points \n'
+                leader_board += player + ' has ' + str(score) + point_or_points(score)
+                self.request.attributes['leader_board'] = leader_board
+
+        reply_dialog = self.reply_dialog[self.intent_name]
+        return Reply.build(reply_dialog['conditions'][condition], self.event)
+
+    @required_fields(['PlayerName'])
+    def add_player_intent(self):
+        logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
+
+        status, message = self.validate_slot_data_type('PlayerName',
+                                                       self.request.attributes['PlayerName'])
+
+        logger.debug("****** status={} message={}".format(status, message))
+        if status != 0:
+            condition = 'invalid_name'
+
+        else:
+            condition = 'valid_name'
+            scorekeeper = Scorekeeper(self.session.attributes['game'])
+            scorekeeper.add_player(self.request.attributes['PlayerName'])
+            self.session.attributes['game'] = scorekeeper.game
+            self.session.save()
+
+        reply_dialog = self.reply_dialog[self.intent_name]
+        return Reply.build(reply_dialog['conditions'][condition], self.event)
+
+    @required_fields(['ScoreNumber'])
+    def add_score_intent(self):
+        logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
+        scorekeeper = Scorekeeper(self.session.attributes['game'])
+
+        condition = None
+        # Manage the player name slot
+        if 'PlayerName' not in self.request.attributes.keys():
+            condition = 'no_player_provided'
+        else:
+            player_name = self.request.attributes['PlayerName']
+            if not scorekeeper.is_player(player_name):
+                condition = 'invalid_player_provided'
+
+        # Manage the Score slot
+        score_str = self.request.attributes['ScoreNumber']
+        status, message = self.validate_slot_data_type('ScoreNumber',score_str)
+        if status != 0:
+            condition = 'invalid_score_provided'
+
+        # if no slot problem add the score
+        if condition is None:
+            condition = 'score_added'
+            scorekeeper.add_score(player_name, score_str)
+            self.session.attributes['game'] = scorekeeper.game
+            score_points = lambda score: '1 point' if score == 1 else str(score) + ' points'
+            self.request.attributes['score_points'] = score_points(int(score_str))
+            self.session.save()
+
+        reply_dialog = self.reply_dialog[self.intent_name]
+        return Reply.build(reply_dialog['conditions'][condition], self.event)
 
 
-class Scorekeer(object):
+
+class Scorekeeper(object):
     def __init__(self, game=None):
-            if game:
-                self._game = game
-            else:
-                self._game = {}
+        if game:
+            self._game = game
+        else:
+            self._game = {}
 
     def add_player(self, player):
-        self._game[player]=0
+        self._game[player] = 0
+
+    def is_player(self, player_name):
+        return player_name in self._game.keys()
 
     def add_score(self, player, score):
         if player in self._game.keys():
@@ -132,4 +161,7 @@ class Scorekeer(object):
     @property
     def game(self):
         return self._game
+
+    def leader_board(self):
+        return sorted(self._game.items(), key=itemgetter(1), reverse=True)
 
