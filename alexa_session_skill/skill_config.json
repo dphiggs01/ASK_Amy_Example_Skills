@@ -12,8 +12,8 @@
       "MyColorIsIntent": "my_color_is_intent",
       "WhatsMyColorIntent": "whats_my_color_intent",
       "AMAZON.HelpIntent": "help_intent",
-      "AMAZON.CancelIntent": "handle_session_end_request",
-      "AMAZON.StopIntent": "handle_session_end_request"
+      "AMAZON.CancelIntent": "default_cancel_intent",
+      "AMAZON.StopIntent": "default_stop_intent"
     },
     "slots": {
       "Color":
@@ -39,6 +39,6 @@
         ],
         "re_prompt_text": "Please tell me your favorite color by saying, my favorite color is red",
         "should_end_session": false
-        }
+      }
   }
 }
