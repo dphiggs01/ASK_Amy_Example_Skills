@@ -1,14 +1,14 @@
 {
   "Skill" : {
     "version": "1.0",
-    "className": "alexa_account_linking_skill.AlexaAccountLinkingSkill",
-    "loggingLevel": "debug"
+    "class_name": "alexa_account_linking_skill.AlexaAccountLinkingSkill",
+    "logging_level": "debug"
   },
   "Session": {
     "persistence": false
   },
   "Dialog": {
-    "intentControl": {
+    "intent_control": {
       "TimezoneIntent": "timezone_intent",
       "AMAZON.HelpIntent": "help_intent",
       "AMAZON.CancelIntent": "default_cancel_intent",

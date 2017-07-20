@@ -6,3 +6,4 @@ ask-amy-cli create_lambda --deploy-json-file cli_config.json
 
 Any subsequent deploys use this 
 ask-amy-cli deploy_lambda --deploy-json-file cli_config.json
+ask-amy-cli logs --log-group-name /aws/lambda/alexa_obama_fact_skill

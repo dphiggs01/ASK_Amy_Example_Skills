@@ -1,14 +1,14 @@
 {
   "Skill": {
     "version": "1.0",
-    "className": "alexa_tide_skill.AlexaTideSkill",
-    "loggingLevel": "debug"
+    "class_name": "alexa_tide_skill.AlexaTideSkill",
+    "logging_level": "debug"
   },
   "Session": {
     "persistence": false
   },
   "Dialog": {
-    "intentControl": {
+    "intent_control": {
       "OneshotTideIntent": "oneshot_tide_intent",
       "DialogTideIntent": "dialog_tide_intent",
       "SupportedCitiesIntent": "supported_cities_intent",

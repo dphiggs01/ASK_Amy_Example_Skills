@@ -1,14 +1,14 @@
 {
   "Skill" : {
     "version": "1.0",
-    "className": "alexa_history_buff_skill.AlexaHistoryBuffSkill",
-    "loggingLevel": "debug"
+    "class_name": "alexa_history_buff_skill.AlexaHistoryBuffSkill",
+    "logging_level": "debug"
   },
   "Session": {
     "persistence": false
   },
   "Dialog": {
-    "intentControl": {
+    "intent_control": {
       "GetFirstEventIntent": "get_first_event_intent",
       "GetNextEventIntent": "get_next_event_intent",
       "AMAZON.HelpIntent": "help_intent",
@@ -26,10 +26,10 @@
     "get_first_event_intent": {
       "conditions": {
         "have_events": {
-          "speech_out_ssml": "<p>{event_1}</p><p>{event_2}</p><p>{event_3}</p> <p>Wanna go deeper in history?</p>",
+          "speech_out_ssml": "<say-as interpret-as='date'>{month} {day_nbr}</say-as> <p>{event_1}</p><p>{event_2}</p><p>{event_3}</p> <p>Wanna go deeper in history?</p>",
           "re_prompt_text": "Do you want to know more about what happened on this date?",
           "card": {
-            "title": "Events on {month} {day}",
+            "title": "Events on {month} {day_nbr}",
             "content": "{event_1}\n{event_2}\n{event_3}\n"
           },
           "should_end_session": false
@@ -46,15 +46,20 @@
           "speech_out_ssml": "<p>{event_1}</p><p>{event_2}</p><p>{event_3}</p> <p>Wanna go deeper in history?</p>",
           "re_prompt_text": "Do you want to know more about what happened on this date?",
           "card": {
-            "title": "Events on {month} {day}",
+            "title": "Events on {month} {day_nbr}",
             "content": "{event_1}\n{event_2}\n{event_3}\n"
           },
           "should_end_session": false
         },
-        "no_events": {
+        "no_more_events": {
           "speech_out_ssml": "We have no more events for this day. Please choose another date",
           "should_end_session": true
+        },
+        "no_events": {
+          "speech_out_ssml": "Sorry, I did not hear that. Please provide a date to start",
+          "should_end_session": false
         }
+
       }
     },
     "launch_request": {

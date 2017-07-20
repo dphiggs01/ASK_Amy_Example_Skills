@@ -25,11 +25,11 @@ class AlexaHistoryBuffSkill(StackDialogManager):
         history_buff = HistoryBuff()
         events = history_buff.get_history_for_date(month, day)
         if len(events) >= 3:
-            self.session.attributes['event_1'] = events.pop()
-            self.session.attributes['event_2'] = events.pop()
-            self.session.attributes['event_3'] = events.pop()
+            self.request.attributes['event_1'] = events.pop()
+            self.request.attributes['event_2'] = events.pop()
+            self.request.attributes['event_3'] = events.pop()
             self.session.attributes['month'] = month
-            self.session.attributes['day'] = day
+            self.session.attributes['day_nbr'] = day
             self.session.attributes['events'] = events
             condition = 'have_events'
         else:
@@ -41,14 +41,18 @@ class AlexaHistoryBuffSkill(StackDialogManager):
 
     def get_next_event_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
-        events = self.session.attributes['events']
-        if len(events) >= 3:
-            self.session.attributes['event_1'] = events.pop()
-            self.session.attributes['event_2'] = events.pop()
-            self.session.attributes['event_3'] = events.pop()
-            condition = 'have_events'
-        else:
+
+        if not self.session.attribute_exists('events'):
             condition = 'no_events'
+        else:
+            events = self.session.attributes['events']
+            if len(events) >= 3:
+                self.request.attributes['event_1'] = events.pop()
+                self.request.attributes['event_2'] = events.pop()
+                self.request.attributes['event_3'] = events.pop()
+                condition = 'have_events'
+            else:
+                condition = 'no_more_events'
 
         reply_dialog = self.reply_dialog[self.intent_name]['conditions'][condition]
         return Reply.build(reply_dialog, self.event)
@@ -107,6 +111,7 @@ class HistoryBuff(object):
 
                 # replace dashes returned in events_str from Wikipedia's API
                 event_text = event_text.replace('\u2013', '')
+                event_text = event_text.replace('\u005c', '')
                 # add comma after year so Alexa pauses before continuing with the sentence
                 event_text = re.sub('^\d+', r'\g<0>,', event_text)
                 events.append(event_text)

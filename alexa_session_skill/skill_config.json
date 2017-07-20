@@ -1,14 +1,14 @@
 {
   "Skill" : {
     "version": "1.0",
-    "className": "alexa_session_skill.AlexaSessionSkill",
-    "loggingLevel": "debug"
+    "class_name": "alexa_session_skill.AlexaSessionSkill",
+    "logging_level": "debug"
   },
   "Session": {
     "persistence": false
   },
   "Dialog": {
-    "intentControl": {
+    "intent_control": {
       "MyColorIsIntent": "my_color_is_intent",
       "WhatsMyColorIntent": "whats_my_color_intent",
       "AMAZON.HelpIntent": "help_intent",

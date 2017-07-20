@@ -1,18 +1,18 @@
 {
   "Skill": {
     "version": "1.0",
-    "className": "alexa_high_low_skill.AlexaHighLowSkill",
-    "loggingLevel": "debug"
+    "class_name": "alexa_high_low_skill.AlexaHighLowSkill",
+    "logging_level": "debug"
   },
   "Session": {
     "persistence": true,
-    "tableName": "HighLowGame",
-    "fieldsToPersist": [
+    "table_name": "HighLowGame",
+    "fields_to_persist": [
       "games_played"
     ]
   },
   "Dialog": {
-    "intentControl": {
+    "intent_control": {
       "NumberGuessIntent": "number_guess_intent",
       "AMAZON.YesIntent": "number_guess_intent",
       "AMAZON.NoIntent": "default_stop_intent",
@@ -32,6 +32,14 @@
         "to_high_to_low": {
           "speech_out_text": [
             "You guessed {guessed_number} this number is to {to_high_to_low} ",
+            "Please guess again."
+          ],
+          "re_prompt_text": "Sorry I did not hear that. Please guess again. ",
+          "should_end_session": false
+        },
+        "range_error": {
+          "speech_out_text": [
+            "You guessed {guessed_number} this number is out of range ",
             "Please guess again."
           ],
           "re_prompt_text": "Sorry I did not hear that. Please guess again. ",

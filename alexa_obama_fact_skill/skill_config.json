@@ -1,14 +1,14 @@
 {
   "Skill": {
     "version": "1.0",
-    "className": "alexa_obama_fact_skill.AlexaObamaFactSkill",
-    "loggingLevel": "debug"
+    "class_name": "alexa_obama_fact_skill.AlexaObamaFactSkill",
+    "logging_level": "debug"
   },
   "Session": {
     "persistence": false
   },
   "Dialog": {
-    "intentControl": {
+    "intent_control": {
       "GetNewFactIntent": "get_new_fact_intent",
       "AMAZON.HelpIntent": "help_intent",
       "AMAZON.CancelIntent": "default_cancel_intent",

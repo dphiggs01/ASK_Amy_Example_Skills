@@ -9,7 +9,7 @@ class AlexaObamaFactSkill(DefaultDialog):
 
     def get_new_fact_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
-        self.session.attributes['obama_fact'] = FactsDB.random_fact()
+        self.request.attributes['obama_fact'] = FactsDB.random_fact()
         return self.handle_default_intent()
 
 
@@ -22,5 +22,5 @@ class FactsDB(object):
         with open(FactsDB.FACTS_FILE, 'r') as file_ptr:
             facts_json = json.load(file_ptr)
             facts = facts_json[FactsDB.FACTS]
-            index = random.randint(0, len(facts))
+            index = random.randint(0, len(facts)-1)
         return facts[index]

@@ -1,18 +1,18 @@
 {
   "Skill": {
     "version": "1.0",
-    "className": "alexa_scorekeeper_skill.AlexaScorekeeperSkill",
-    "loggingLevel": "debug"
+    "class_name": "alexa_scorekeeper_skill.AlexaScorekeeperSkill",
+    "logging_level": "debug"
   },
   "Session": {
     "persistence": true,
-    "tableName": "Scorekeeper",
-    "fieldsToPersist": [
+    "table_name": "Scorekeeper",
+    "fields_to_persist": [
       "game"
     ]
   },
   "Dialog": {
-    "intentControl": {
+    "intent_control": {
       "AddPlayerIntent": "add_player_intent",
       "AddScoreIntent": "add_score_intent",
       "ResetPlayersIntent": "reset_players_intent",
