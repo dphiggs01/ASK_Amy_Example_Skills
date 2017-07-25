@@ -1,0 +1,77 @@
+{
+  "Skill": {
+    "version": "1.0",
+    "class_name": "alexa_wise_guy_skill.AlexaWiseGuySkill",
+    "logging_level": "debug"
+  },
+  "Session": {
+    "persistence": false
+  },
+  "Dialog": {
+    "intent_control": {
+      "TellMeAJokeIntent": "tell_me_a_joke_intent",
+      "WhosThereIntent": "whos_there_intent",
+      "SetupNameWhoIntent": "setup_name_who_intent",
+      "AMAZON.HelpIntent": "help_intent",
+      "AMAZON.CancelIntent": "default_cancel_intent",
+      "AMAZON.StopIntent": "default_stop_intent"
+    },
+    "slots": {
+      "SetupName": {
+        "speech_out_text": "Please provide the SetupName",
+        "re_prompt_text": "Sorry I did not hear that.",
+        "expected_intent": "setup_name_who_intent"
+      }
+    },
+    "tell_me_a_joke_intent": {
+      "card_title": "Wise Guy",
+      "speech_out_text": "Knock knock!",
+      "re_prompt_text": "You can ask, who's there",
+      "should_end_session": false
+    },
+    "whos_there_intent": {
+      "conditions": {
+        "expected": {
+          "card_title": "Wise Guy",
+          "speech_out_text": "{who}",
+          "re_prompt_text": "You can ask, {who} who?",
+          "should_end_session": false
+        },
+        "unexpected": {
+          "card_title": "Wise Guy",
+          "speech_out_text": "Thats not how we tell a Knock Knock Joke, Restart by saying tell me a joke",
+          "re_prompt_text": "You can ask, tell me a joke?",
+          "should_end_session": false
+        }
+      }
+    },
+    "setup_name_who_intent": {
+      "conditions": {
+        "expected": {
+          "speech_out_ssml": "{joke_speech}",
+          "card": {
+            "title": "Wise Guy",
+            "content": "{joke_text}"
+          },
+          "should_end_session": true
+        },
+        "unexpected": {
+          "card_title": "Wise Guy",
+          "speech_out_text": "Thats not how we tell a Knock Knock Joke, Restart by saying tell me a joke",
+          "re_prompt_text": "You can ask, tell me a joke?",
+          "should_end_session": false
+        }
+      }
+    },
+    "help_intent": {
+      "method_name": "handle_default_intent",
+      "speech_out_text": [
+        "Knock knock jokes are a fun call and response type of joke. ",
+        "To start the joke, just say tell me a joke, ",
+        "or you can say exit."
+      ],
+      "should_end_session": false
+    }
+  }
+}
+

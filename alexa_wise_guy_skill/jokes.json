@@ -1,0 +1,42 @@
+{
+  "to": {
+    "speech": "Correct grammar is <break time=\"0.2s\" /> to whom.",
+    "text": "Correct grammar is 'to whom'."
+  },
+  "beets": {
+    "speech": "Beats me!",
+    "text": "Beats me!"
+  },
+  "little old lady": {
+    "speech": "I didn't know you could yodel!",
+    "text": "I didn't know you could yodel!"
+  },
+  "a broken pencil": {
+    "speech": "Never mind. It's pointless.",
+    "text": "Never mind. It's pointless."
+  },
+  "snow": {
+    "speech": "Snow use. I forgot.",
+    "text": "Snow use. I forgot."
+  },
+  "boo": {
+    "speech": "Aww <break time=\"0.3s\" /> it's okay <break time=\"0.3s\" /> don't cry.",
+    "text": "Aww, it's okay, don't cry."
+  },
+  "woo": {
+    "speech": "Don't get so excited, it's just a joke.",
+    "text": "Don't get so excited, it's just a joke."
+  },
+  "spell": {
+    "speech": "<say-as interpret-as=\"characters\">who</say-as>",
+    "text": "w.h.o"
+  },
+  "owls": {
+    "speech": "I didn't know you had a cold!",
+    "text": "I didn't know you had a cold!"
+  },
+  "berry": {
+    "speech": "Berry nice to meet you.",
+    "text": "Berry nice to meet you."
+  }
+}
