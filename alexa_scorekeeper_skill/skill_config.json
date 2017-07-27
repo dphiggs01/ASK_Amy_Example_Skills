@@ -27,43 +27,42 @@
         "speech_out_text": "OK. What is the players name?",
         "re_prompt_text": "Sorry, I did not hear the players name. Please say again?",
         "expected_intent": "add_player_intent",
-        "type": "alexa_scorekeeper_skill_type.LIST_OF_PLAYER_NAMES"
+        "validation": {
+          "type_validator": "alexa_scorekeeper_skill_type.LIST_OF_PLAYER_NAMES",
+          "msg_01_text": "Sorry I could not confirm the player name, please try again? "
+        }
       },
       "ScoreNumber": {
-        "speech_out_text": "Please provide the number of points. You can say five points",
+        "speech_out_text": "Please provide the number of points and the name. You can say give john five points",
         "re_prompt_text": "Sorry, I did not hear the points. Please say again?",
         "expected_intent": "add_score_intent",
-        "type": "AMAZON.NUMBER"
-      }
-    },
-    "add_player_intent": {
-      "conditions": {
-        "valid_name": {
-          "speech_out_text": "{PlayerName} has joined your game.",
-          "should_end_session": false
-        },
-        "invalid_name": {
-          "speech_out_text": "Error adding name {PlayerName}, Please try again with a different name",
-          "should_end_session": false
+        "validation": {
+          "type_validator": "AMAZON_NUMBER",
+          "msg_01_text": "Sorry I could not confirm the number of points, please try again? "
+        }
+      },
+      "ScoreName": {
+        "speech_out_text": "Please provide the name and the points, for example give john five points",
+        "re_prompt_text": "Sorry, I did not hear the name for this score. Please say again?",
+        "expected_intent": "add_score_intent",
+        "validation": {
+          "type_validator": "alexa_scorekeeper_skill_type.LIST_OF_PLAYER_NAMES",
+          "msg_01_text": "Sorry I heard {ScoreName} but they are not in the current game"
         }
       }
     },
+    "add_player_intent": {
+      "speech_out_text": "{PlayerName} has joined your game.",
+      "should_end_session": false
+    },
     "add_score_intent": {
       "conditions": {
-        "no_player_provided": {
-          "speech_out_text": "Sorry we did not get a player name. Please say something like: give john five points",
-          "should_end_session": false
-        },
         "invalid_player_provided": {
-          "speech_out_text": "Error adding points for {PlayerName}. Please check that this person is currently playing",
-          "should_end_session": false
-        },
-        "invalid_score_provided": {
-          "speech_out_text": "Sorry we did not understand the score provided. Please try again",
+          "speech_out_text": "Error adding points for {ScoreName}. Please check that this person is currently playing",
           "should_end_session": false
         },
         "score_added": {
-          "speech_out_text": "{score_points} added to {PlayerName}'s total",
+          "speech_out_text": "{score_points} added to {ScoreName}'s total",
           "should_end_session": false
         }
       }

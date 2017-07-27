@@ -46,9 +46,7 @@ class AlexaTideSkill(StackDialogManager):
     def oneshot_tide_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
 
-        # With ask_amy we really do not need two intents as the DialogTideIntent will do the same thing
-        # if it has all the required fields. This is maintained to keep compatibility with the sample
-        # intent_schema.json provided by Java sample apps
+        # If we are called Redirect to the dialog tide intent
         return self.redirect_to_initialize_dialog('dialog_tide_intent')
 
 
@@ -153,4 +151,3 @@ class TideInfo(object):
                 logger.critical('The server couldn\'t fulfill the request.')
                 logger.critical('Error code: ', e.code)
         return ret_val
-

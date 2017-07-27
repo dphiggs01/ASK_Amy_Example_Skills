@@ -13,7 +13,7 @@
       "intent": "AddScoreIntent",
       "slots": [
         {
-          "name": "PlayerName",
+          "name": "ScoreName",
           "type": "LIST_OF_PLAYER_NAMES"
         },
         {

@@ -35,8 +35,12 @@
           "should_end_session": false
         },
         "no_events": {
-          "speech_out_ssml": "Sorry, we are having a problem with the server. Please try agian later",
+          "speech_out_ssml": "Sorry, we are having a problem with the server. Please try again later",
           "should_end_session": true
+        },
+        "bad_date": {
+          "speech_out_ssml": "Sorry, I did not get that date. Please try again, what was the date?",
+          "should_end_session": false
         }
       }
       },
@@ -64,11 +68,11 @@
     },
     "launch_request": {
       "method_name": "handle_default_intent",
-      "speech_out_text": "History buff. What day do you want events for?",
+      "speech_out_text": "History buff. What day would you like events for?",
       "re_prompt_text": [
         "With History Buff, you can get historical events for any day of the year. ",
-        "For example, you could say today, or August thirtieth. ",
-        "Now, which day do you want? "
+        "For example, you could say today, or April third. ",
+        "Now, which day would you like? "
       ],
       "should_end_session": false
     },
@@ -77,8 +81,8 @@
         "method_name": "handle_default_intent",
         "speech_out_text": [
           "With History Buff, you can get historical events for any day of the year. ",
-          "For example, you could say today, or August thirtieth, or you can say exit. ",
-          "Now, which day do you want?"
+          "For example, you could say today, or April third, or you can say exit. ",
+          "Now, which day would you like?"
         ],
         "re_prompt_text": "Which day do you want?",
         "should_end_session": false

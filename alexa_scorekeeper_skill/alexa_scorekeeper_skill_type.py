@@ -1,10 +1,12 @@
-from ask_amy.utilities.custom_type import Custom_Validator
+from ask_amy.utilities.slot_validator import Slot_Validator
 import logging
 
 logger = logging.getLogger()
 
 
-class LIST_OF_PLAYER_NAMES(Custom_Validator):
+class LIST_OF_PLAYER_NAMES(Slot_Validator):
+    VALID = 0  # Passed validation
+    MSG_01_TEXT = 1  # Failed Validation
 
     _valid_values = ['aaron', 'abbie', 'abby', 'abe', 'abigail', 'abraham', 'abram', 'ada', 'adaline', 'adam', 'addy',
                     'agatha', 'aggy', 'agnes', 'aileen', 'al', 'alan', 'albert', 'aldo', 'aldrich', 'alex', 'alexander',
@@ -73,11 +75,10 @@ class LIST_OF_PLAYER_NAMES(Custom_Validator):
                     'william', 'willie', 'wilma', 'wilson', 'winnie', 'winnifred', 'winny', 'woody', 'zach',
                     'zachariah', 'zachary']
 
-    def is_valid_value(value):
-        status = 0
-        message = ""
-        is_name_valid = value.lower() in LIST_OF_PLAYER_NAMES._valid_values
-        if not is_name_valid:
-            status = -1
-            message = "sorry I could not understand the name provided"
-        return status, message
+    def is_valid_value(self, value):
+        logger.debug("LIST_OF_PLAYER_NAMES.is_valid_value {}".format(value))
+        status_code = LIST_OF_PLAYER_NAMES.MSG_01_TEXT
+        if isinstance(value, str):
+            if value.lower() in LIST_OF_PLAYER_NAMES._valid_values:
+                status_code = LIST_OF_PLAYER_NAMES.VALID
+        return status_code

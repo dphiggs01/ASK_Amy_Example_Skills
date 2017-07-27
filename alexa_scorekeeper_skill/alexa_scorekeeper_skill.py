@@ -70,46 +70,24 @@ class AlexaScorekeeperSkill(StackDialogManager):
     @required_fields(['PlayerName'])
     def add_player_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
-
-        status, message = self.validate_slot_data_type('PlayerName',
-                                                       self.request.attributes['PlayerName'])
-
-        logger.debug("****** status={} message={}".format(status, message))
-        if status != 0:
-            condition = 'invalid_name'
-
-        else:
-            condition = 'valid_name'
-            scorekeeper = Scorekeeper(self.session.attributes['game'])
-            scorekeeper.add_player(self.request.attributes['PlayerName'])
-            self.session.attributes['game'] = scorekeeper.game
-            self.session.save()
+        scorekeeper = Scorekeeper(self.session.attributes['game'])
+        scorekeeper.add_player(self.request.attributes['PlayerName'])
+        self.session.attributes['game'] = scorekeeper.game
+        self.session.save()
 
         reply_dialog = self.reply_dialog[self.intent_name]
-        return Reply.build(reply_dialog['conditions'][condition], self.event)
+        return Reply.build(reply_dialog, self.event)
 
-    @required_fields(['ScoreNumber'])
+    @required_fields(['ScoreNumber','ScoreName'])
     def add_score_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
         scorekeeper = Scorekeeper(self.session.attributes['game'])
 
-        condition = None
-        # Manage the player name slot
-        if 'PlayerName' not in self.request.attributes.keys():
-            condition = 'no_player_provided'
-        else:
-            player_name = self.request.attributes['PlayerName']
-            if not scorekeeper.is_player(player_name):
-                condition = 'invalid_player_provided'
-
-        # Manage the Score slot
         score_str = self.request.attributes['ScoreNumber']
-        status, message = self.validate_slot_data_type('ScoreNumber',score_str)
-        if status != 0:
-            condition = 'invalid_score_provided'
-
-        # if no slot problem add the score
-        if condition is None:
+        player_name = self.request.attributes['ScoreName']
+        if not scorekeeper.is_player(player_name):
+            condition = 'invalid_player_provided'
+        else:
             condition = 'score_added'
             scorekeeper.add_score(player_name, score_str)
             self.session.attributes['game'] = scorekeeper.game
@@ -164,4 +142,3 @@ class Scorekeeper(object):
 
     def leader_board(self):
         return sorted(self._game.items(), key=itemgetter(1), reverse=True)
-

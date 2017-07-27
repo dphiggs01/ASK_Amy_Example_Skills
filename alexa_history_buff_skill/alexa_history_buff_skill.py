@@ -3,7 +3,6 @@ from ask_amy.state_mgr.stack_dialog_mgr import required_fields
 from ask_amy.core.reply import Reply
 import urllib.request
 from urllib.error import URLError
-from urllib.parse import urlencode
 import logging
 import datetime
 import json
@@ -18,22 +17,25 @@ class AlexaHistoryBuffSkill(StackDialogManager):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
 
         date_str = self.request.attributes['day']
-        date = datetime.datetime.strptime(date_str, "%Y-%m-%d")
+        try:
+            date = datetime.datetime.strptime(date_str, "%Y-%m-%d")
+            month = date.strftime('%B')
+            day = str(date.day)
+            history_buff = HistoryBuff()
+            events = history_buff.get_history_for_date(month, day)
+            if len(events) >= 3:
+                self.request.attributes['event_1'] = events.pop()
+                self.request.attributes['event_2'] = events.pop()
+                self.request.attributes['event_3'] = events.pop()
+                self.session.attributes['month'] = month
+                self.session.attributes['day_nbr'] = day
+                self.session.attributes['events'] = events
+                condition = 'have_events'
+            else:
+                condition = 'no_events'
 
-        month = date.strftime('%B')
-        day = str(date.day)
-        history_buff = HistoryBuff()
-        events = history_buff.get_history_for_date(month, day)
-        if len(events) >= 3:
-            self.request.attributes['event_1'] = events.pop()
-            self.request.attributes['event_2'] = events.pop()
-            self.request.attributes['event_3'] = events.pop()
-            self.session.attributes['month'] = month
-            self.session.attributes['day_nbr'] = day
-            self.session.attributes['events'] = events
-            condition = 'have_events'
-        else:
-            condition = 'no_events'
+        except ValueError:
+            condition = 'bad_date'
 
         reply_dialog = self.reply_dialog[self.intent_name]['conditions'][condition]
         return Reply.build(reply_dialog, self.event)
@@ -71,7 +73,6 @@ class HistoryBuff(object):
     def _http_call(self, uri_path, query_params=None, ret_json=True):
         url = uri_path
         if query_params is not None:
-            # url += "?" + urlencode(query_params)
               url += "?" + query_params
         try:
             print(url)

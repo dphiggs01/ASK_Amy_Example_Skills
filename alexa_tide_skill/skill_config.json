@@ -20,12 +20,20 @@
       "Date": {
         "speech_out_text": "For which date would you like tide information for? ",
         "re_prompt_text": "Sorry I did not hear that. You can say today or saturday ",
-        "expected_intent": "dialog_tide_intent"
+        "expected_intent": "dialog_tide_intent",
+        "validation": {
+          "type_validator": "alexa_tide_types.DATE",
+          "msg_01_text": "Sorry I could not confirm the date, please try again, what is the date? "
+        }
       },
       "City": {
         "speech_out_text": "For which city would you like tide information for? ",
         "re_prompt_text": "Sorry I did not hear that. You can say seattle or boston ",
-        "expected_intent": "dialog_tide_intent"
+        "expected_intent": "dialog_tide_intent",
+        "validation": {
+          "type_validator": "alexa_tide_types.LIST_OF_CITIES",
+          "msg_01_text": "Sorry I could not confirm the city, please try again, what is the city? "
+        }
       }
     },
     "oneshot_tide_intent": {
@@ -33,7 +41,7 @@
         "oneshot_tide_intent is not needed with ask_amy framework as the dialog_tide_intent ",
         "will act as a one shot if all the required data is provided ",
         "it is kept here to maintain compatibility with the Java Examples."
-        ]
+      ]
     },
     "dialog_tide_intent": {
       "conditions": {
@@ -46,12 +54,20 @@
             "The second high tide will be at <say-as interpret-as='time'> {second_high_tide_time} ",
             "</say-as> and will peak at about {second_high_tide_height} feet. "
           ],
+          "card": {
+            "title": "Tides for {City} on {Date}",
+            "content": [
+              "The first high tide will be around {first_high_tide_time} and will peak at {first_high_tide_height} feet\n",
+              "The next low tide will be around {second_low_tide_time} and will peak at {second_low_tide_height} feet\n",
+              "The next high tide will be around {second_high_tide_time} and will peak at {second_high_tide_height} feet\n"
+            ]
+          },
           "should_end_session": true
         },
         "failed_to_find_tides": {
           "speech_out_text": [
             "You provided {City} as the city and {Date} as the date ",
-            "Sorry, the National Oceanic tide service is experiencing a problem. ",
+            "Sorry, the National Oceanic tide service could not find the data requested. ",
             "Please try again later."
           ],
           "should_end_session": true
@@ -59,7 +75,7 @@
       }
     },
     "supported_cities_intent": {
-      "card_title": "SupportedCitiesIntent",
+      "card_title": "Supported Cities",
       "speech_out_text": [
         "Currently, I know tide information for these coastal cities: {coastal_cities}",
         "Which city would you like tide information for?"
@@ -71,7 +87,7 @@
       "method_name": "handle_default_intent",
       "speech_out_ssml": [
         "Welcome to Tide Pooler. ",
-        "<audio src='https://s3.amazonaws.com/ask-storage/tidePooler/OceanWaves.mp3'/>",
+        "<audio src='https://s3.amazonaws.com/ilandapps-bucket-1/OceanWave.mp3'/>",
         "Which city would you like tide information for?"
       ],
       "re_prompt_text": [
