@@ -1,11 +1,7 @@
-# The Alex Hello Skill
-This is the simplest skill you can create with ASK_AMY and you do not
-even need any code. 
+# The Alex High Low Guessing game
+This is the simplest guessing game skill. This skill demonstrates automatic persistence
 
-ask-amy-cli create_role --role-name alexa_lambda_role
-
-ask-amy-cli create_template --skill-name alexa_high_low_skill --role-name arn:aws:iam::280056172273:role/alexa_lambda_role --intent-schema-file speech_assets/intent_schema.json
-
+You will need to make sure that you have a valid role in you cli_config.json
 ask-amy-cli create_lambda --deploy-json-file cli_config.json
 
 Any subsequent deploys use this 

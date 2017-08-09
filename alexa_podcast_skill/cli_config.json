@@ -1,5 +1,5 @@
 {
-    "skill_name": "alexa_session_skill",
+    "skill_name": "alexa_podcast_skill",
     "skill_home_dir": ".",
     "aws_region": "us-east-1",
     "aws_profile": "default",
@@ -11,6 +11,6 @@
     "lambda_memory": "128",
     "lambda_zip": "alexa_skill.zip",
 
-    "ask_amy_dev": false,
+    "ask_amy_dev": true,
     "ask_amy_home_dir": "../../ask_amy"
 }

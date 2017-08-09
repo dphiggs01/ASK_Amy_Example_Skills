@@ -1,0 +1,77 @@
+{
+  "Skill" : {
+    "version": "1.0",
+    "class_name": "alexa_podcast_skill.AlexaPodcastSkill",
+    "logging_level": "debug"
+  },
+  "Session": {
+    "persistence": true,
+    "table_name": "AmyPodcast",
+    "fields_to_persist": [
+      "active_url",
+      "offset"
+    ]
+
+  },
+  "Dialog": {
+    "intent_control": {
+      "PlayAudio": "play_audio",
+      "AMAZON.PauseIntent": "pause_intent",
+      "AMAZON.ResumeIntent": "resume_intent",
+      "AMAZON.NextIntent": "next_intent",
+      "AMAZON.PreviousIntent": "previous_intent",
+      "AMAZON.StartOverIntent": "start_over_intent",
+      "AMAZON.HelpIntent": "help_intent",
+      "AMAZON.CancelIntent": "default_cancel_intent",
+      "AMAZON.StopIntent": "default_stop_intent"
+    },
+    "slots": {
+
+    },
+    "play_audio": {
+        "speech_out_ssml": [
+          "Starting <say-as interpret-as='characters'>AWS</say-as> pod cast episode ",
+          "<say-as interpret-as='characters'>139</say-as>."
+          ],
+        "should_end_session": true
+        },
+    "pause_intent": {
+        "speech_out_text": "Pausing pod cast",
+        "should_end_session": true
+        },
+    "resume_intent": {
+        "speech_out_text": "Resuming pod cast",
+        "should_end_session": true
+        },
+    "next_intent": {
+        "speech_out_text":[
+          "Sorry this version of amy pod does not support the next command.  ",
+          "You can say: Pause, Resume, or Start Over"
+          ],
+        "should_end_session": true
+        },
+    "previous_intent": {
+        "speech_out_text":[
+          "Sorry this version of amy pod does not support the previous command.  ",
+          "You can say: Pause, Resume, or Start Over"
+          ],
+        "should_end_session": true
+        },
+    "start_over_intent": {
+        "method_name": "play_audio",
+        "speech_out_ssml": [
+          "Starting <say-as interpret-as='characters'>AWS</say-as> pod cast episode ",
+          "<say-as interpret-as='characters'>139</say-as>."
+          ],
+        "should_end_session": true
+        },
+    "help_intent": {
+        "method_name": "handle_default_intent",
+        "speech_out_text": [
+          "Welcome to the amy pod cast example skill",
+          "You can say: begin pod cast or you can say exit. What would you like to do?"
+          ],
+        "should_end_session": false
+        }
+  }
+}
