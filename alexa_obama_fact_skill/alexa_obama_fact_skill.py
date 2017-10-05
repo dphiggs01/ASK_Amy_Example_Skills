@@ -12,7 +12,6 @@ class AlexaObamaFactSkill(DefaultDialog):
         self.request.attributes['obama_fact'] = FactsDB.random_fact()
         return self.handle_default_intent()
 
-
 class FactsDB(object):
     FACTS_FILE = "./facts.json"
     FACTS = "facts"
