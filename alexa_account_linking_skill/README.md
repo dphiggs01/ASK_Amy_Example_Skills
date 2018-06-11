@@ -33,9 +33,13 @@ copy the arn paste it into the enpoint of the skill
 * Once complete go back to the  configuration
 
 Authorization URL: https://www.amazon.com/ap/oa
+
 client ID: amzn1.application-oa2-client.87b4d880dxxxxxxxx
+
 scope: postal_code
+
 Access token uri: https://api.amazon.com/auth/o2/token
+
 client secret: copy from client secret in security profile
 
 
