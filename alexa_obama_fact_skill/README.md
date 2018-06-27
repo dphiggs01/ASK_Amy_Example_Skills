@@ -16,7 +16,7 @@ $ vim cli_config.json
 ~~~
 2. Deploy the code to AWS Lambda
 ~~~
-$ ask-amy-cli deploy_lambda --create-json-file cli_config.json
+$ ask-amy-cli create_lambda --create-json-file cli_config.json
 ~~~
 3. Create a new skill in your Amazon Development Account.
 
