@@ -1,14 +1,16 @@
-# The Alex History buff skill
-This Alexa skill calls Wikipedia to get history info about a specific day in history
+# The Alex Scorekeeper Skill
+This skill keeps track of a game score and will save the score data across
+Alexa sessions.
 
 ### This example skill demonstrates the following features:
 * logging level setting (debug)
 * custom intent
 * Amazon intent
+* automatic session persistence
 * use of slots
+* custom slot type validation
 * conditional response
 * stack dialog manager
-* required fields processing
 * default intent handler
 * voice response (ssml) with variable content
 * provide a card title and card content creation
@@ -46,7 +48,7 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 
 Note: If you want to check the lambda logs you can use the below
 ~~~
-$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_history_buff_skill
+$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_scorekeeper_skill
 ~~~
 
 ###### Credit

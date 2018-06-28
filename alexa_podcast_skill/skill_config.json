@@ -68,7 +68,7 @@
     "help_intent": {
         "method_name": "handle_default_intent",
         "speech_out_text": [
-          "Welcome to the amy pod cast example skill",
+          "Welcome to the ask amy pod cast example skill",
           "You can say: begin pod cast or you can say exit. What would you like to do?"
           ],
         "should_end_session": false

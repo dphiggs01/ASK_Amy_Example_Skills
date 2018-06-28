@@ -1,17 +1,16 @@
-# The Alex History buff skill
-This Alexa skill calls Wikipedia to get history info about a specific day in history
+# The Alexa podcast skill
+This Alexa skill plays an Amazon podcast and demonstrates the use of the
+Audio interface in Alexa Skill Kit
 
 ### This example skill demonstrates the following features:
 * logging level setting (debug)
+* automatic session persistence
 * custom intent
 * Amazon intent
-* use of slots
-* conditional response
 * stack dialog manager
-* required fields processing
 * default intent handler
-* voice response (ssml) with variable content
-* provide a card title and card content creation
+* voice response (ssml) content
+* provide no card output
 
 
 ### Prerequisites
@@ -38,6 +37,8 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 3. Create a new skill in your Amazon Development Account.
     * Select the `JSON Editor` and Drag & drop the _interaction_model.json_ on to the new skill.
     Click `Save` and `Build Model`.
+    * Select `Interfaces` check the `Audio Player` selection button.
+    __(Additional requirement for podcast skill!!)__
     * Select `Endpoint` copy the _Lambda arn_  _arn:aws:lambda:us-east-1:********_
     (Note: It was returned in step two above) to `Default Region` select `Save Endpoint`.
     * Test your new skill!
@@ -46,13 +47,12 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 
 Note: If you want to check the lambda logs you can use the below
 ~~~
-$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_history_buff_skill
+$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_high_low_skill
 ~~~
+
+
 
 ###### Credit
 Many of the example skills were first published as Java or Node.js code
 by Amazon https://github.com/amzn. However since Amazon created the _new_
 interaction model the original code is no longer available.
-
-
-

@@ -12,6 +12,11 @@ class AlexaObamaFactSkill(DefaultDialog):
         self.request.attributes['obama_fact'] = FactsDB.random_fact()
         return self.handle_default_intent()
 
+# Note: Our FactsDB has no Alexa specific code or functionality
+# This simple fact generator could be used just as easily in a UI.
+# We call this design feature a "Separation of Concern" and it gives our
+# code an additional robustness.
+
 class FactsDB(object):
     FACTS_FILE = "./facts.json"
     FACTS = "facts"

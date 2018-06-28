@@ -55,6 +55,11 @@ class AlexaHighLowSkill(StackDialogManager):
         return Reply.build(reply_dialog, self.event)
 
 
+# Note: Our HighLowGame has no Alexa specific code or functionality
+# This simple guessing game could be used just as easily in a UI
+# We call this design feature a "Separation of Concern" and it gives our
+# code an additional robustness.
+
 class HighLowGame(object):
     Winner, ToLow, ToHigh, RangeError = range(4)
 

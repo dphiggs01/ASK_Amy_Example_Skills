@@ -1,0 +1,42 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "obama facts",
+            "intents": [
+                {
+                    "name": "GetNewFactIntent",
+                    "slots": [],
+                    "samples": [
+                        "tell me an obama fact",
+                        "a fact",
+                        "an obama fact",
+                        "tell me a fact",
+                        "give me a fact",
+                        "give me a obama fact",
+                        "tell me trivia",
+                        "tell me a obama trivia",
+                        "give me trivia",
+                        "give me a obama trivia",
+                        "give me some information",
+                        "give me some obama information",
+                        "tell me something",
+                        "give me something"
+                    ]
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                }
+            ],
+            "types": []
+        }
+    }
+}
