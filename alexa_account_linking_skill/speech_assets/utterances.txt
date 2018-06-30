@@ -1,2 +1,0 @@
-TimezoneIntent what is my timezone
-TimezoneIntent tell me my timezone
