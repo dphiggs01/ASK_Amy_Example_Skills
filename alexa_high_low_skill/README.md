@@ -33,16 +33,23 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
         ~~~
         $ ask-amy-cli deploy_lambda --deploy-json-file cli_config.json
         ~~~
-
+    * Take note of the "FunctionArn": "arn:aws:lambda:us-east-1:**********2273:function:alexa_*****"
 
 3. Create a new skill in your Amazon Development Account.
-    * Select the `JSON Editor` and Drag & drop the _interaction_model.json_ on to the new skill.
+    * Select `Create Skill` at https://developer.amazon.com/alexa/console/ask
+
+    * Enter a _Skill Name_ and select _custom_ as the skill type. Then select `Create a skill`.
+
+    * Select the `JSON Editor` (Note: the `JSON Editor` is in the left menu pane) Drag & drop the _interaction_model.json_ on to the new skill.
     Click `Save` and `Build Model`.
-    * Select `Endpoint` copy the _Lambda arn_  _arn:aws:lambda:us-east-1:********_
+
+    * Select `Endpoint` select `AWS Lambda ARN` copy the _Lambda arn_  _arn:aws:lambda:us-east-1:********_
     (Note: It was returned in step two above) to `Default Region` select `Save Endpoint`.
-    * Test your new skill!
+
+    * Select `Test` tab (Note: `Test` is in the menu bar at the top of the page) on the test page. Select slider to enable test!
 
 **"Congratulations you have deployed a new skill!"**
+
 
 Note: If you want to check the lambda logs you can use the below
 ~~~

@@ -1,16 +1,13 @@
-# The Alex Wise Guy Skill
-This skill tells some pretty punny knock knock jokes
-
+# The Hello World Skill
+This is the simples skill you can write and it actually contains no custom code!
+The whole skill is written as a Dialog Model.
 ### This example skill demonstrates the following features:
 * logging level setting (debug)
 * custom intent
 * Amazon intent
-* use of slots
-* conditional response
-* stack dialog manager
 * default intent handler
-* voice response (ssml) with variable content
-* provide a card title and card content creation
+* default dialog manager
+* voice response
 
 
 ### Prerequisites
@@ -51,13 +48,10 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 
 Note: If you want to check the lambda logs you can use the below
 ~~~
-$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_wise_guy_skill
+$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_hello_skill
 ~~~
 
 ###### Credit
 Many of the example skills were first published as Java or Node.js code
 by Amazon https://github.com/amzn. However since Amazon created the _new_
 interaction model the original code is no longer available.
-
-
-

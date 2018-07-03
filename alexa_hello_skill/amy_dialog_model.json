@@ -1,0 +1,31 @@
+{
+  "Skill": {
+    "version": "1.0",
+    "class_name": "ask_amy.core.default_dialog.DefaultDialog",
+    "logging_level": "debug"
+  },
+  "Session": {
+    "persistence": false
+  },
+  "Dialog": {
+    "intent_control": {
+      "HelloIntent": "hello_intent",
+      "AMAZON.HelpIntent": "help_intent",
+      "AMAZON.CancelIntent": "default_cancel_intent",
+      "AMAZON.StopIntent": "default_stop_intent"
+    },
+    "hello_intent": {
+      "method_name": "handle_default_intent",
+      "speech_out_text": "Hello. Welcome to the world of Alexa development!",
+      "should_end_session": true
+    },
+    "help_intent": {
+      "method_name": "handle_default_intent",
+      "speech_out_text": [
+        "To use this simple skill You can either say hello or you can say exit. ",
+        "What would you like to say?"
+      ],
+      "should_end_session": false
+    }
+  }
+}

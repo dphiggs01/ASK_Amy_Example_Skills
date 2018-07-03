@@ -1,5 +1,5 @@
 {
-    "skill_name": "alexa_high_low_skill",
+    "skill_name": "alexa_hello_skill",
     "skill_home_dir": ".",
     "aws_region": "us-east-1",
     "aws_profile": "default",
@@ -12,5 +12,5 @@
     "lambda_zip": "alexa_skill.zip",
 
     "ask_amy_dev": false,
-    "ask_amy_home_dir": "../../ask_amy"
+    "ask_amy_home_dir": ""
 }
