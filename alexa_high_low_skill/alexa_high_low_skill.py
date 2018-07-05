@@ -26,7 +26,7 @@ class AlexaHighLowSkill(StackDialogManager):
         """
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
 
-        # 1. Get the processing details for this intent from skill_configuration Dialog
+        # 1. Get the processing details for this intent from amy_dialog_model
         reply_dialog = self.reply_dialog[self.intent_name]
 
         # 2. See if we have any slots filled

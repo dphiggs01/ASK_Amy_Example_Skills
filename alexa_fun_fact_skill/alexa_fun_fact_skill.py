@@ -5,11 +5,16 @@ import logging
 
 logger = logging.getLogger()
 
-class AlexaObamaFactSkill(DefaultDialog):
+class AlexaFunFactSkill(DefaultDialog):
 
     def get_new_fact_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
-        self.request.attributes['obama_fact'] = FactsDB.random_fact()
+        # Setting fun_fact as a request.attribute(s) means that this attribute is only in scope for the
+        # duration of the request. i.e. Once the reply is sent back to the user the variable is no longer available
+        self.request.attributes['fun_fact'] = FactsDB.random_fact()
+
+        # handle_default_intent() builds an Alexa Reply JSON based on the data provided in get_new_fact_intent of the
+        # amy_dialog_model.json.
         return self.handle_default_intent()
 
 # Note: Our FactsDB has no Alexa specific code or functionality
@@ -18,7 +23,7 @@ class AlexaObamaFactSkill(DefaultDialog):
 # code an additional robustness.
 
 class FactsDB(object):
-    FACTS_FILE = "./facts.json"
+    FACTS_FILE = "./facts2.json"
     FACTS = "facts"
 
     @staticmethod

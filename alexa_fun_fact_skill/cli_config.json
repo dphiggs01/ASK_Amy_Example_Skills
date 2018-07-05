@@ -1,5 +1,5 @@
 {
-    "skill_name": "alexa_obama_fact_skill",
+    "skill_name": "alexa_fun_fact_skill",
     "skill_home_dir": ".",
     "aws_region": "us-east-1",
     "aws_profile": "default",

@@ -13,7 +13,7 @@
           ],
           "samples": [
              "my color is {Color}",
-              "my favorite color is {Color}"
+             "my favorite color is {Color}"
           ]
         },
         {

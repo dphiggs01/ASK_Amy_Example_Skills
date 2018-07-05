@@ -1,24 +1,22 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "obama facts",
+            "invocationName": "fun facts",
             "intents": [
                 {
                     "name": "GetNewFactIntent",
                     "slots": [],
                     "samples": [
-                        "tell me an obama fact",
+                        "tell me a fun fact",
                         "a fact",
-                        "an obama fact",
                         "tell me a fact",
                         "give me a fact",
-                        "give me a obama fact",
+                        "give me a fun fact",
                         "tell me trivia",
-                        "tell me a obama trivia",
+                        "tell me some trivia",
                         "give me trivia",
-                        "give me a obama trivia",
                         "give me some information",
-                        "give me some obama information",
+                        "give me some fun information",
                         "tell me something",
                         "give me something"
                     ]
