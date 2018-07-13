@@ -13,12 +13,12 @@ interaction model the original code is no longer available.
 * __Fun Facts Skill__ - Simple but useful skill that has Alexa say interesting fact of your choosing.
 * __High Low Skill__ - Guess a number from 0 to 100. The skill saves session data and knows how many games you have played.
 * __Session Skill__ - Demos Alexa Session management.
-* __Scorekeeper Skill__ Demos Session management and persistence. Useful for carrying on a conversation that lasts longer that one Alexa invocation session.
-* __History Buff Skill__ Demos Web API integration. History Buff provided details about a day in history. The data comes from Wikipedia.
-* __Tide Skill__ A fun skill that gets local Tide information for coastal towns.
-* __Wise Guy Skill__ A simple conversation skill. Wise guy tells knock knock jokes.
-* __Podcast Skill__ Podcast skill will play a podcast and implements the Alexa Audio interface.
-* __Account Linking Skill__ Demonstrates linking your skill to an External Account.
+* __Scorekeeper Skill__ - Demos Session management and persistence. Useful for carrying on a conversation that lasts longer that one Alexa invocation session.
+* __History Buff Skill__ - Demos Web API integration. History Buff provided details about a day in history. The data comes from Wikipedia.
+* __Tide Skill__ - A fun skill that gets local Tide information for coastal towns.
+* __Wise Guy Skill__ - A simple conversation skill. Wise guy tells knock knock jokes.
+* __Podcast Skill__ - Podcast skill will play a podcast and implements the Alexa Audio interface.
+* __Account Linking Skill__ - Demonstrates linking your skill to an External Account.
 
 
 ### Deploy your own skills
