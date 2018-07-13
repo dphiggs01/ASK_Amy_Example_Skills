@@ -1,6 +1,6 @@
 # The Alexa  ASK Amy Skills
 This is a collection of example skills that uses the ASK Amy framework for deployment.
-[ASK Amy](https://dphiggs01.github.io/ask_amy/) is a lightweight Python framework that greatly simplifies Alexa Skill development.
+[ASK Amy](https://dphiggs01.github.io/ask_amy/) is a lightweight Python framework that greatly simplifies Alexa Skill development and deploy.
 
 
 Many of the example skills here were first published as Java or Node.js code
