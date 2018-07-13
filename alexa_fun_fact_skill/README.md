@@ -1,7 +1,6 @@
-# The Alexa Obama Fact Skill
+# The Alexa Fun Fact Skill
 Have Alexa read interesting random facts on any subject of your choosing.
-This skill just happens to be about presidential facts. Here is an
-interesting fact using ASK Amy this skill is written in less than 25
+Here is an interesting fact using ASK Amy this skill is written in less than 25
 lines of code!
 
 ### This example skill demonstrates the following features:
@@ -21,7 +20,9 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 ### Deployment
 
 1. Update ``arn:aws:iam::**********:role/alexa_lambda_role`` in cli_config.json.
+   Open a terminal window and change into the directory for this skill
     *  ~~~
+        $ cd xxxxxxx/ask_amy_example_skills/alexa_fun_fact_skill
         $ vim cli_config.json
         ~~~
 2. Deploy the code to AWS Lambda
@@ -53,7 +54,7 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 
 Note: If you want to check the lambda logs you can use the below
 ~~~
-$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_obama_fact_skill
+$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_fun_fact_skill
 ~~~
 
 ###### Credit

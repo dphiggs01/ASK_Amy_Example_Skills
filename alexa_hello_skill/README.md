@@ -17,7 +17,9 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 ### Deployment
 
 1. Update ``arn:aws:iam::**********:role/alexa_lambda_role`` in cli_config.json.
+   Open a terminal window and change into the directory for this skill
     *  ~~~
+        $ cd xxxxxxxx/ask_amy_example_skills/alexa_hello_skill
         $ vim cli_config.json
         ~~~
 2. Deploy the code to AWS Lambda

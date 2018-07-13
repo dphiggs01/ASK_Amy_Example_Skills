@@ -20,7 +20,9 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 ### Deployment
 
 1. Update ``arn:aws:iam::**********:role/alexa_lambda_role`` in cli_config.json.
+   Open a terminal window and change into the directory for this skill
     *  ~~~
+        $ cd xxxxxxx/ask_amy_example_skills/alexa_podcast_skill
         $ vim cli_config.json
         ~~~
 2. Deploy the code to AWS Lambda
@@ -47,7 +49,7 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 
 Note: If you want to check the lambda logs you can use the below
 ~~~
-$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_high_low_skill
+$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_podcast_skill
 ~~~
 
 
