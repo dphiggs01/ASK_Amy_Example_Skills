@@ -1,6 +1,6 @@
 # This Alexa Session Skill Skill
 This example skill demonstrates simple session persistence by ask you
-for your favorite color and then remebering that color for the length
+for your favorite color and then remembering that color for the length
 of the session.
 
 ### This example skill demonstrates the following features:
