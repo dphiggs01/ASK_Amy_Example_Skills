@@ -20,7 +20,7 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 ### Deployment
 
 1. Update ``arn:aws:iam::**********:role/alexa_lambda_role`` in cli_config.json.
-   Open a terminal window and change into the directory for this skill
+   Open a terminal window and change into the directory for this skill and edit cli_config.json.
     *  ~~~
         $ cd xxxxxxx/ask_amy_example_skills/alexa_session_skill
         $ vim cli_config.json
