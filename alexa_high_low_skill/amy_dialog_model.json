@@ -51,7 +51,7 @@
       "method_name": "handle_default_intent",
       "speech_out_text": [
         "Welcome to High Low guessing game. You have played {games_played} times. ",
-        "Would you like to play? Say yes to start the game or no to quit."
+        "Would you like to play? Say yes to start the game or quit to exit."
       ],
       "re_prompt_text": "Sorry I did not hear that. Please guess again. ",
       "should_end_session": false

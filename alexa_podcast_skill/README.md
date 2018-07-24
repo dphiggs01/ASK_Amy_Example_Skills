@@ -21,6 +21,7 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 
 1. Update ``arn:aws:iam::**********:role/alexa_lambda_role`` in cli_config.json.
    Open a terminal window and change into the directory for this skill and edit cli_config.json.
+   If you don't have a role you can create one with the following command: `ask-amy-cli create_role –role-name alexa_skill_role`
     *  ~~~
         $ cd xxxxxxx/ask_amy_example_skills/alexa_podcast_skill
         $ vim cli_config.json
@@ -37,6 +38,10 @@ https://dphiggs01.github.io/ask_amy/prerequisites.html
 
 
 3. Create a new skill in your Amazon Development Account.
+    * Select `Create Skill` at https://developer.amazon.com/alexa/console/ask
+
+    * Enter a _Skill Name_ (podcast) and select _custom_ as the skill type. Then select `Create a skill`.
+
     * Select the `JSON Editor` and Drag & drop the _interaction_model.json_ on to the new skill.
     Click `Save` and `Build Model`.
     * Select `Interfaces` check the `Audio Player` selection button.
