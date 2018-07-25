@@ -15,13 +15,13 @@ Audio interface in Alexa Skill Kit
 
 ### Prerequisites
 Before starting make sure you have satisfied the prerequisites.
-https://dphiggs01.github.io/ask_amy/prerequisites.html
+http://askamy.net/prerequisites.html
 
 ### Deployment
 
 1. Update ``arn:aws:iam::**********:role/alexa_lambda_role`` in cli_config.json.
    Open a terminal window and change into the directory for this skill and edit cli_config.json.
-   If you don't have a role you can create one with the following command: `ask-amy-cli create_role –role-name alexa_skill_role`
+   If you don't have a role you can create one with the following command: `ask-amy-cli create_role –-role-name alexa_skill_role`
     *  ~~~
         $ cd xxxxxxx/ask_amy_example_skills/alexa_podcast_skill
         $ vim cli_config.json
