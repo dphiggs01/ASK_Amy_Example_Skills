@@ -1,0 +1,46 @@
+{
+  "Skill": {
+    "version": "1.0",
+    "class_name": "alexa_color_guess_skill.AlexaSessionSkill",
+    "logging_level": "debug"
+  },
+  "Session": {
+    "persistence": false
+  },
+  "Dialog": {
+    "intent_control": {
+      "MyColorIsIntent": "my_color_is_intent",
+      "WhatsMyColorIntent": "whats_my_color_intent",
+      "AMAZON.HelpIntent": "help_intent",
+      "AMAZON.CancelIntent": "default_cancel_intent",
+      "AMAZON.StopIntent": "default_stop_intent"
+    },
+    "my_color_is_intent": {
+      "speech_out_text": "I now know your favorite color is {Color}. You can now ask. What's my favorite color?",
+      "re_prompt_text": "You can ask me your favorite color by saying, what's my favorite color?",
+      "should_end_session": false
+    },
+    "whats_my_color_intent": {
+      "conditions": {
+        "have_color": {
+          "speech_out_text": "Your favorite color is {Color}.",
+          "should_end_session": true
+        },
+        "dont_have_color": {
+          "speech_out_text": "I do not know your favorite color.  Please say my favorite color is red.",
+          "re_prompt_text": "Sorry I did not hear that. Please say my favorite color is red. ",
+          "should_end_session": false
+        }
+      }
+    },
+    "help_intent": {
+      "method_name": "handle_default_intent",
+      "speech_out_text": [
+        "Welcome to the Alexa Skills Kit sample. Please tell me your favorite color by ",
+        "saying, my favorite color is red."
+      ],
+      "re_prompt_text": "Sorry I did not heard that, please tell me your favorite color.",
+      "should_end_session": false
+    }
+  }
+}

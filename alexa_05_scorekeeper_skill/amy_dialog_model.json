@@ -1,0 +1,138 @@
+{
+  "Skill": {
+    "version": "1.0",
+    "class_name": "alexa_scorekeeper_skill.AlexaScorekeeperSkill",
+    "logging_level": "debug"
+  },
+  "Session": {
+    "persistence": true,
+    "table_name": "Scorekeeper",
+    "fields_to_persist": [
+      "game"
+    ]
+  },
+  "Dialog": {
+    "intent_control": {
+      "AddPlayerIntent": "add_player_intent",
+      "AddScoreIntent": "add_score_intent",
+      "ResetPlayersIntent": "reset_players_intent",
+      "NewGameIntent": "new_game_intent",
+      "TellScoresIntent": "tell_scores_intent",
+      "AMAZON.HelpIntent": "help_intent",
+      "AMAZON.CancelIntent": "default_cancel_intent",
+      "AMAZON.StopIntent": "default_stop_intent"
+    },
+    "slots": {
+      "PlayerName": {
+        "speech_out_text": "OK. What is the players name?",
+        "re_prompt_text": "Sorry, I did not hear the players name. Please say again?",
+        "expected_intent": "add_player_intent",
+        "validation": {
+          "type_validator": "alexa_scorekeeper_skill_type.LIST_OF_PLAYER_NAMES",
+          "msg_01_text": "Sorry I could not confirm the player name, please try again? "
+        }
+      },
+      "ScoreNumber": {
+        "speech_out_text": "Please provide the number of points and the name. You can say give john five points",
+        "re_prompt_text": "Sorry, I did not hear the points. Please say again?",
+        "expected_intent": "add_score_intent",
+        "validation": {
+          "type_validator": "AMAZON_NUMBER",
+          "msg_01_text": "Sorry I could not confirm the number of points, please try again? "
+        }
+      },
+      "ScoreName": {
+        "speech_out_text": "Please provide the name and the points, for example give john five points",
+        "re_prompt_text": "Sorry, I did not hear the name for this score. Please say again?",
+        "expected_intent": "add_score_intent",
+        "validation": {
+          "type_validator": "alexa_scorekeeper_skill_type.LIST_OF_PLAYER_NAMES",
+          "msg_01_text": "Sorry I heard {ScoreName} but they are not in the current game"
+        }
+      }
+    },
+    "add_player_intent": {
+      "speech_out_text": "{PlayerName} has joined your game.",
+      "should_end_session": false
+    },
+    "add_score_intent": {
+      "conditions": {
+        "invalid_player_provided": {
+          "speech_out_text": "Error adding points for {ScoreName}. Please check that this person is currently playing",
+          "should_end_session": false
+        },
+        "score_added": {
+          "speech_out_text": "{score_points} added to {ScoreName}'s total",
+          "should_end_session": false
+        }
+      }
+    },
+    "reset_players_intent": {
+      "speech_out_text": "OK New game started without players. Who do you want to add first?",
+      "should_end_session": false
+    },
+    "new_game_intent": {
+      "conditions": {
+        "no_players": {
+          "speech_out_text": "New game started. Who's your first player?",
+          "re_prompt_text": "Please tell me who is your first player?",
+          "should_end_session": false
+        },
+        "has_players": {
+          "speech_out_text": "New game started with {players_text} ",
+          "re_prompt_text": [
+            "You can give a player points, add another player,",
+            "reset all players or exit. What would you like?"
+          ],
+          "should_end_session": false
+        }
+      }
+    },
+    "tell_scores_intent": {
+      "conditions": {
+        "no_players": {
+          "speech_out_text": "Currently there is no score as you have no players",
+          "should_end_session": false
+        },
+        "has_players": {
+          "speech_out_text": "The score looks like this, {leader_board}",
+          "card": {
+            "title": "Scorekeeper Leader Board",
+            "content": "The score looks like this:\n {leader_board}"
+          },
+          "should_end_session": false
+        }
+      }
+    },
+    "welcome_request": {
+      "conditions": {
+        "no_players": {
+          "speech_out_text": "ScoreKeeper, Let's start your game. Who's your first player?",
+          "re_prompt_text": "Please tell me who is your first player?",
+          "should_end_session": false
+        },
+        "has_players": {
+          "speech_out_text": [
+            "ScoreKeeper, you have {players_text} in the game. ",
+            "You can give a player points, add another player, ",
+            "reset all players or exit. Which would you like? "
+          ],
+          "re_prompt_text": "Please tell me who is your first player?",
+          "should_end_session": false
+        }
+      }
+    },
+    "help_intent": {
+      "method_name": "handle_default_intent",
+      "speech_out_text": [
+        "Here's some things you can say. Add John, give John five points, ",
+        "tell me the score, new game, reset, and exit",
+        "So, what would you like to do?"
+      ],
+      "should_end_session": false
+    }
+  }
+}
+
+
+

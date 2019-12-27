@@ -15,3 +15,5 @@ dist/
 #Files to ignore
 logfile.log
 alexa_skill.zip
+
+.DS_Store
