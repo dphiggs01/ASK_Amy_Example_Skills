@@ -1,6 +1,6 @@
-# The Alexa Fun Fact Skill
+# The Alexa Coffee Facts Skill
 Have Alexa read interesting random facts on any subject of your choosing.
-Here is an interesting fact using ASK Amy this skill is written in less than 25
+For this specific skill we have chosen Coffee Facts. But here is an interesting fact using ASK Amy this skill is written in less than 25
 lines of code!
 
 ### This example skill demonstrates the following features:
@@ -17,7 +17,7 @@ lines of code!
 Before starting make sure you have satisfied the prerequisites.
 http://askamy.net/prerequisites.html
 
-### Deployment
+### Deployment (Development)
 
 1. Update ``arn:aws:iam::**********:role/alexa_lambda_role`` in cli_config.json.
    Open a terminal window and change into the directory for this skill and edit cli_config.json.
@@ -40,7 +40,7 @@ http://askamy.net/prerequisites.html
 3. Create a new skill in your Amazon Development Account.
     * Select `Create Skill` at https://developer.amazon.com/alexa/console/ask
 
-    * Enter a _Skill Name_ (fun facts) and select _custom_ as the skill type and _Provision your own_ as the method to host the backend. Then select `Create a skill`.
+    * Enter a _Skill Name_ (coffee facts) and select _custom_ as the skill type and _Provision your own_ as the method to host the backend. Then select `Create a skill`.
 
     * On the Choose a template page select select _Start from Scratch_. and click `Choose`.
 
@@ -55,10 +55,16 @@ http://askamy.net/prerequisites.html
 **"Congratulations you have deployed a new skill!"**
 
 
-Note: If you want to check the lambda logs you can use the below
+Note: If you want to check the lambda logs you can use the below command
 ~~~
-$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_fun_fact_skill
+$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_coffee_facts_skill
 ~~~
+
+### Distribution & Certification
+Distributions and Certifications are two additional steps required to make a skill
+production ready (Available on the Skills Market Place). You can find additional 
+help on these steps __[here](../distribution_certification.md)__.
+
 
 ###### Credit
 Many of the example skills were first published as Java or Node.js code

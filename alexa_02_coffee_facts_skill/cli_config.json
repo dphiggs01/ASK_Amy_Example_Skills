@@ -1,9 +1,9 @@
 {
-    "skill_name": "alexa_fun_fact_skill",
+    "skill_name": "alexa_coffee_facts_skill",
     "skill_home_dir": ".",
     "aws_region": "us-east-1",
     "aws_profile": "default",
-    "aws_role": "arn:aws:iam::************:role/alexa_skill_role",
+    "aws_role": "arn:aws:iam::************:role/alexa_lambda_role",
 
     "lambda_runtime": "python3.6",
     "lambda_handler": "ask_amy.lambda_function.lambda_handler",

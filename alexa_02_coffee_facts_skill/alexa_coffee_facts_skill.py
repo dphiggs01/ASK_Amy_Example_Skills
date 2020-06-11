@@ -5,7 +5,7 @@ import logging
 
 logger = logging.getLogger()
 
-class AlexaFunFactSkill(DefaultDialog):
+class AlexaCoffeeFactsSkill(DefaultDialog):
 
     def get_new_fact_intent(self):
         logger.debug("**************** entering {}.{}".format(self.__class__.__name__, self.intent_name))
@@ -23,7 +23,7 @@ class AlexaFunFactSkill(DefaultDialog):
 # code an additional robustness.
 
 class FactsDB(object):
-    FACTS_FILE = "./facts2.json"
+    FACTS_FILE = "facts.json"
     FACTS = "facts"
 
     @staticmethod

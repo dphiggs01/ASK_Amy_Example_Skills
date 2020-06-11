@@ -1,0 +1,26 @@
+PUBLIC NAME: Coffee Facts
+
+ONE SENTENCE DESCRIPTION:
+The Coffee Facts Skill provides fun and interesting facts about coffee.
+
+DETAILED DESCRIPTION:
+The Coffee Facts Skill provides fun and interesting facts about coffee.
+
+- Here are some of the ways you can use the skill.
+
+You can say: "Alexa, ask Coffee Facts, Give me a fact?"
+Or You can say: "Alexa, ask Coffee Facts, Give me some history?"
+
+WHATS NEW:
+
+EXAMPLE PHRASES
+
+
+TESTING  INSTRUCTIONS:
+Hi Test team.
+There are no special instructions for using the skill. The skill simply provides random coffee facts from a list of facts.
+ 
+
+
+
+

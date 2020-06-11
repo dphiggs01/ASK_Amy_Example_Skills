@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "fun facts",
+            "invocationName": "coffee facts",
             "intents": [
                 {
                     "name": "GetNewFactIntent",
@@ -15,8 +15,8 @@
                         "tell me trivia",
                         "tell me some trivia",
                         "give me trivia",
-                        "give me some information",
-                        "give me some fun information",
+                        "give me some history",
+                        "give me some fun history",
                         "tell me something",
                         "give me something"
                     ]

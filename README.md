@@ -10,7 +10,7 @@ interaction model the original code is no longer available.
 ### Example Skill list
 
 * __[Hello Skill](./alexa_01_hello_skill/README.md)__ - Super Simple "Hello World" skill.
-* __[Fun Facts Skill](./alexa_02_fun_fact_skill/README.md)__ - Simple but useful skill that has Alexa say interesting fact of your choosing.
+* __[Fun Facts Skill](./alexa_02_coffee_facts_skill/README.md)__ - Simple but useful skill that has Alexa say interesting fact of your choosing.
 * __[High Low Skill](./alexa_03_high_low_skill/README.md)__ - Guess a number from 0 to 100. The skill saves session data and knows how many games you have played.
 * __[Session Skill](./alexa_06_color_guess_skill/README.md)__ - Demos Alexa Session management.
 * __[Scorekeeper Skill](./alexa_05_scorekeeper_skill/README.md)__ - Demos Session management and persistence. Useful for carrying on a conversation that lasts longer that one Alexa invocation session.
