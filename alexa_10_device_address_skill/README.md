@@ -1,6 +1,6 @@
-# The Hello World Skill
-This is the simplest skill you can write and it actually contains no custom code!
-The whole skill is written as a Dialog Model.
+# The Device Address Skill
+The Device Address Skill demonstrates retrieving the Physical Address associated with 
+the Alexa device being used.
 ### This example skill demonstrates the following features:
 * logging level setting (debug)
 * custom intent
@@ -20,7 +20,7 @@ http://askamy.net/prerequisites.html
    Open a terminal window and change into the directory for this skill and edit cli_config.json.
    If you don't have a role you can create one with the following command: `ask-amy-cli create_role --role-name alexa_skill_role`
     *  ~~~
-        $ cd xxxxxxxx/ask_amy_example_skills/alexa_01_hello_skill
+        $ cd xxxxxxxx/ask_amy_example_skills/alexa_10_device_address_skill
         $ vim cli_config.json
         ~~~
 2. Deploy the code to AWS Lambda
@@ -35,9 +35,10 @@ http://askamy.net/prerequisites.html
     * Take note of the "FunctionArn": "arn:aws:lambda:us-east-1:**********2273:function:alexa_*****"
 
 3. Create a new skill in your Amazon Development Account.
-    * Select `Create Skill` at https://developer.amazon.com/alexa/console/ask
+    * Select `Create Skill` at [https://developer.amazon.com/alexa/console/ask](https://developer.amazon.com/alexa/console/ask)
 
-    * Enter a _Skill Name_ (simple skill) and select _custom_ as the skill type  and _Provision your own_ as the method to host the backend. Then select `Create a skill`.
+    * Enter a _Skill Name_ (simple skill) and select _custom_ as the skill type  and _Provision your own_ as the method to host the backend. 
+    Then select `Create a skill`.
 
     * The the choose a template page select select _Start from Scratch_ and click `Choose`.
 
@@ -53,7 +54,7 @@ http://askamy.net/prerequisites.html
 
 Note: If you want to check the lambda logs you can use the below
 ~~~
-$ ask-amy-cli logs --log-group-name /aws/lambda/alexa_hello_skill
+$ ask-amy-cli logs --log-group-name /aws/lambda/device_address_skill
 ~~~
 
 ###### Credit
